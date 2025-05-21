@@ -1,9 +1,12 @@
 {
   "item.nicksmod.bismuth": "Bismuth",
   "item.nicksmod.raw_bismuth": "Raw Bismuth",
+  "item.nicksmod.chisel": "Chisel",
 
   "block.nicksmod.bismuth_block": "Block of Bismuth",
   "block.nicksmod.bismuth_ore": "Bismuth Ore",
+  "block.nicksmod.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
+
 
   "creativetab.nicksmod.bismuth_items": "Bismuth Items",
   "creativetab.nicksmod.bismuth_blocks": "Bismuth Blocks"
