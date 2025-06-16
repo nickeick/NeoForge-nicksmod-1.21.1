@@ -18,6 +18,9 @@ public class ModItems {
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             () -> new ChiselItem(new Item.Properties().durability(32)));
 
+    public static final DeferredItem<Item> HOT_DOG = ITEMS.register("hot_dog",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.HOT_DOG)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
