@@ -23,7 +23,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.BISMUTH);
                         output.accept(ModItems.RAW_BISMUTH);
                         output.accept(ModItems.CHISEL);
-                        output.accept(ModItems.HOT_DOG);
                     })
                     .build());
 
@@ -36,6 +35,39 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BISMUTH_ORE);
                         output.accept(ModBlocks.BISMUTH_DEEPSLATE_ORE);
                         output.accept(ModBlocks.MAGIC_BLOCK);
+                    })
+                    .build());
+
+    public static final Supplier<CreativeModeTab> HOT_DOG_ITEMS = CREATIVE_MODE_TAB.register("hot_dogs_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.HOT_DOG.get()))
+                    .title(Component.translatable("creativetab.nicksmod.hot_dog_items"))
+                    .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModItems.HOT_DOG);
+                        output.accept(ModItems.PIZZADINO_TOKEN);
+                        output.accept(ModItems.PIZZA_SLICE);
+                        output.accept(ModBlocks.PIZZA_BLOCK);
+
+                        output.accept(ModBlocks.HOT_DOG_BLOCK);
+
+                        output.accept(ModBlocks.HOT_DOG_STAIRS);
+                        output.accept(ModBlocks.HOT_DOG_SLAB);
+
+                        output.accept(ModBlocks.HOT_DOG_PRESSURE_PLATE);
+                        output.accept(ModBlocks.HOT_DOG_BUTTON);
+
+                        output.accept(ModBlocks.HOT_DOG_FENCE);
+                        output.accept(ModBlocks.HOT_DOG_FENCE_GATE);
+                        output.accept(ModBlocks.HOT_DOG_WALL);
+
+                        output.accept(ModBlocks.HOT_DOG_DOOR);
+                        output.accept(ModBlocks.HOT_DOG_TRAPDOOR);
+
+                        output.accept(ModBlocks.HOT_DOG_LAMP);
+
+                        output.accept(ModItems.PIZZA_HELMET);
+                        output.accept(ModItems.PIZZA_CHESTPLATE);
+                        output.accept(ModItems.PIZZA_LEGGINGS);
+                        output.accept(ModItems.PIZZA_BOOTS);
                     })
                     .build());
 

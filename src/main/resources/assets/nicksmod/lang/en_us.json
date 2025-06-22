@@ -4,6 +4,29 @@
   "item.nicksmod.chisel": "Chisel",
 
   "item.nicksmod.hot_dog": "Hot Dog",
+  "block.nicksmod.hot_dog_block": "Hot Dog Block",
+
+  "block.nicksmod.hot_dog_stairs": "Hot Dog Stairs",
+  "block.nicksmod.hot_dog_slab": "Hot Dog Slab",
+  "block.nicksmod.hot_dog_button": "Hot Dog Button",
+  "block.nicksmod.hot_dog_pressure_plate": "Hot Dog Pressure Plate",
+  "block.nicksmod.hot_dog_fence": "Hot Dog Fence",
+  "block.nicksmod.hot_dog_fence_gate": "Hot Dog Fence Gate",
+  "block.nicksmod.hot_dog_wall": "Hot Dog Wall",
+  "block.nicksmod.hot_dog_door": "Hot Dog Door",
+  "block.nicksmod.hot_dog_trapdoor": "Hot Dog Trapdoor",
+  "block.nicksmod.hot_dog_lamp": "Hot Dog Lamp",
+
+  "item.nicksmod.pizzadino_token": "Pizzadino Token",
+  "item.nicksmod.pizza_slice": "Slice of Pizza",
+  "block.nicksmod.pizza_block": "Block of Pizza",
+
+  "item.nicksmod.pizza_helmet": "Helmet of Pizza",
+  "item.nicksmod.pizza_chestplate": "Chestplate of Pizza",
+  "item.nicksmod.pizza_leggings": "Leggings of Pizza",
+  "item.nicksmod.pizza_boots": "Boots of Pizza",
+
+
 
   "block.nicksmod.bismuth_block": "Block of Bismuth",
   "block.nicksmod.bismuth_ore": "Bismuth Ore",
@@ -12,5 +35,6 @@
   "block.nicksmod.magic_block": "Magic Block",
 
   "creativetab.nicksmod.bismuth_items": "Bismuth Items",
-  "creativetab.nicksmod.bismuth_blocks": "Bismuth Blocks"
+  "creativetab.nicksmod.bismuth_blocks": "Bismuth Blocks",
+  "creativetab.nicksmod.hot_dog_items": "Hot Dogs"
 }
