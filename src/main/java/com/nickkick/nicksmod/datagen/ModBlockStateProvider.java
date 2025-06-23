@@ -3,14 +3,21 @@ package com.nickkick.nicksmod.datagen;
 import com.nickkick.nicksmod.NicksMod;
 import com.nickkick.nicksmod.block.ModBlocks;
 import com.nickkick.nicksmod.block.custom.HotDogLampBlock;
+import com.nickkick.nicksmod.block.custom.MustardCropBlock;
+import com.nickkick.nicksmod.block.custom.TomatoCropBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
+
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -44,6 +51,40 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.HOT_DOG_TRAPDOOR, "_button");
 
         customLamp();
+
+        makeCrop((CropBlock) ModBlocks.TOMATO_CROP.get(), "tomato_crop_stage", "tomato_crop_stage");
+        makeCrop((CropBlock) ModBlocks.MUSTARD_CROP.get(), "mustard_crop_stage", "mustard_crop_stage");
+    }
+
+    public void makeCrop(CropBlock block, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, block, modelName, textureName);
+
+        getVariantBuilder(block).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        int stateValue = 0;
+
+        if(block instanceof TomatoCropBlock) {
+            stateValue = getTomatoAge(state, block);
+        }
+        if(block instanceof MustardCropBlock) {
+            stateValue = getMustardAge(state, block);
+        }
+
+        models[0] = new ConfiguredModel(models().crop(modelName + stateValue,
+                ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "block/" + textureName + stateValue)).renderType("cutout"));
+
+        return models;
+    }
+
+    private Integer getTomatoAge(BlockState state, CropBlock block) {
+        return state.getValue(((TomatoCropBlock) block).getAgeProperty());
+    }
+
+    private Integer getMustardAge(BlockState state, CropBlock block) {
+        return state.getValue(((MustardCropBlock) block).getAgeProperty());
     }
 
     private void customLamp() {

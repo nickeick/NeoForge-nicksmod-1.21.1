@@ -1,7 +1,9 @@
 package com.nickkick.nicksmod.datagen;
 
 import com.nickkick.nicksmod.block.ModBlocks;
+import com.nickkick.nicksmod.block.custom.TomatoCropBlock;
 import com.nickkick.nicksmod.item.ModItems;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +19,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.fml.common.Mod;
 
@@ -56,6 +60,18 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.HOT_DOG_LAMP.get());
 
         dropSelf(ModBlocks.PIZZA_BLOCK.get());
+
+        LootItemCondition.Builder lootItemConditionBuilderTomato = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.TOMATO_CROP.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TomatoCropBlock.AGE, 3));
+
+        this.add(ModBlocks.TOMATO_CROP.get(), this.createCropDrops(ModBlocks.TOMATO_CROP.get(),
+                ModItems.TOMATO.get(), ModItems.TOMATO_SEEDS.get(), lootItemConditionBuilderTomato));
+
+        LootItemCondition.Builder lootItemConditionBuilderMustard = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.MUSTARD_CROP.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TomatoCropBlock.AGE, 3));
+
+        this.add(ModBlocks.MUSTARD_CROP.get(), this.createCropDrops(ModBlocks.MUSTARD_CROP.get(),
+                ModItems.MUSTARD_SEEDS.get(), ModItems.MUSTARD_SEEDS.get(), lootItemConditionBuilderMustard));
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {

@@ -6,6 +6,10 @@
   "item.nicksmod.hot_dog": "Hot Dog",
   "block.nicksmod.hot_dog_block": "Hot Dog Block",
 
+  "item.nicksmod.hot_dog_with_ketchup": "Hot Dog with Ketchup",
+  "item.nicksmod.hot_dog_with_mustard": "Hot Dog with Mustard",
+  "item.nicksmod.hot_dog_with_ketchup_and_mustard": "Hot Dog with Ketchup and Mustard",
+
   "block.nicksmod.hot_dog_stairs": "Hot Dog Stairs",
   "block.nicksmod.hot_dog_slab": "Hot Dog Slab",
   "block.nicksmod.hot_dog_button": "Hot Dog Button",
@@ -26,7 +30,15 @@
   "item.nicksmod.pizza_leggings": "Leggings of Pizza",
   "item.nicksmod.pizza_boots": "Boots of Pizza",
 
+  "item.nicksmod.tomato": "Tomato",
+  "item.nicksmod.tomato_seeds": "Tomato Seeds",
+  "item.nicksmod.tomato_crop": "Tomato Crop",
 
+  "item.nicksmod.mustard_seeds": "Mustard Seeds",
+  "item.nicksmod.mustard_crop": "Mustard Crop",
+
+  "item.nicksmod.mustard": "Mustard",
+  "item.nicksmod.ketchup": "Ketchup",
 
   "block.nicksmod.bismuth_block": "Block of Bismuth",
   "block.nicksmod.bismuth_ore": "Bismuth Ore",

@@ -35,21 +35,56 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.BISMUTH_BLOCK)
                 .unlockedBy("has_bismuth_block", has(ModBlocks.BISMUTH_BLOCK)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HOT_DOG.get(), 2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.HOT_DOG.get(), 2)
                 .pattern("#X#")
                 .define('#', Items.BREAD)
                 .define('X', Items.COOKED_PORKCHOP)
                 .unlockedBy("has_bread", has(Items.BREAD))
                 .unlockedBy("has_cooked_porkchop", has(Items.COOKED_PORKCHOP)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.HOT_DOG_BLOCK.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG_WITH_KETCHUP.get())
+                .requires(ModItems.HOT_DOG)
+                .requires(ModItems.KETCHUP)
+                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG))
+                .unlockedBy("has_ketchup", has(ModItems.KETCHUP)).save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG_WITH_MUSTARD.get())
+                .requires(ModItems.HOT_DOG)
+                .requires(ModItems.MUSTARD)
+                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG))
+                .unlockedBy("has_mustard", has(ModItems.MUSTARD)).save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD.get())
+                .requires(ModItems.HOT_DOG)
+                .requires(ModItems.KETCHUP)
+                .requires(ModItems.MUSTARD)
+                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG))
+                .unlockedBy("has_ketchup", has(ModItems.KETCHUP))
+                .unlockedBy("has_hot_mustard", has(ModItems.MUSTARD))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD.get())
+                .requires(ModItems.HOT_DOG_WITH_KETCHUP)
+                .requires(ModItems.MUSTARD)
+                .unlockedBy("has_hot_dog_with_ketchup", has(ModItems.HOT_DOG_WITH_KETCHUP))
+                .unlockedBy("has_mustard", has(ModItems.MUSTARD))
+                .save(recipeOutput, "nicksmod:hot_dog_with_ketchup_and_mustard_from_just_ketchup");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD.get())
+                .requires(ModItems.HOT_DOG_WITH_MUSTARD)
+                .requires(ModItems.KETCHUP)
+                .unlockedBy("has_hot_dog_with_mustard", has(ModItems.HOT_DOG_WITH_MUSTARD))
+                .unlockedBy("has_ketchup", has(ModItems.KETCHUP))
+                .save(recipeOutput, "nicksmod:hot_dog_with_ketchup_and_mustard_from_just_mustard");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModBlocks.HOT_DOG_BLOCK.get())
                 .pattern("HHH")
                 .pattern("HHH")
                 .pattern("HHH")
                 .define('H', ModItems.HOT_DOG.get())
                 .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG)).save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.HOT_DOG.get(), 9)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.HOT_DOG.get(), 9)
                 .requires(ModBlocks.HOT_DOG_BLOCK)
                 .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK))
                 .save(recipeOutput, "nicksmod:hot_dog_from_hot_dog_block");
@@ -61,12 +96,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('X', ModBlocks.HOT_DOG_BLOCK.get())
                 .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK)).save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HOT_DOG_BLOCK.get(), 9)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModBlocks.HOT_DOG_BLOCK.get(), 9)
                 .requires(ModItems.PIZZADINO_TOKEN)
                 .unlockedBy("has_pizzadino_token", has(ModItems.PIZZADINO_TOKEN))
                 .save(recipeOutput, "nicksmod:hot_dog_block_from_pizzadino_token");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PIZZA_SLICE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.PIZZA_SLICE.get())
                 .pattern("P  ")
                 .pattern("PP ")
                 .pattern("PPP")
@@ -79,7 +114,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pizza_slice", has(ModItems.PIZZA_SLICE))
                 .save(recipeOutput, "nicksmod:pizzadino_token_from_pizza_slice");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.PIZZA_BLOCK.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModBlocks.PIZZA_BLOCK.get())
                 .pattern("PPP")
                 .pattern("PPP")
                 .pattern("PPP")
@@ -118,6 +153,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("P P")
                 .define('P', ModItems.PIZZA_SLICE.get())
                 .unlockedBy("has_pizza_slice", has(ModItems.PIZZA_SLICE)).save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.KETCHUP.get())
+                .requires(ModItems.TOMATO)
+                .unlockedBy("has_tomato", has(ModItems.TOMATO))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.TOMATO_SEEDS.get())
+                .requires(ModItems.KETCHUP)
+                .unlockedBy("has_ketchup", has(ModItems.KETCHUP))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.MUSTARD.get())
+                .requires(ModItems.MUSTARD_SEEDS)
+                .unlockedBy("has_mustard_seeds", has(ModItems.MUSTARD_SEEDS))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.MUSTARD_SEEDS.get())
+                .requires(ModItems.MUSTARD)
+                .unlockedBy("has_mustard", has(ModItems.MUSTARD))
+                .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 18)
                 .requires(ModBlocks.BISMUTH_BLOCK)

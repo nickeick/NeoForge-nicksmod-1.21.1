@@ -1,9 +1,8 @@
-package com.nickkick.nicksmod.block.custom;
+package com.nickkick.nicksmod.item.custom;
 
 import com.google.common.collect.ImmutableMap;
 import com.nickkick.nicksmod.item.ModArmorMaterials;
 import net.minecraft.core.Holder;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;

@@ -43,6 +43,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.BISMUTH.get());
         basicItem(ModItems.RAW_BISMUTH.get());
         basicItem(ModItems.HOT_DOG.get());
+        basicItem(ModItems.HOT_DOG_WITH_KETCHUP.get());
+        basicItem(ModItems.HOT_DOG_WITH_MUSTARD.get());
+        basicItem(ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD.get());
+
         basicItem(ModItems.CHISEL.get());
 
         buttonItem(ModBlocks.HOT_DOG_BUTTON, ModBlocks.HOT_DOG_BLOCK);
@@ -58,6 +62,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         trimmedArmorItem(ModItems.PIZZA_CHESTPLATE);
         trimmedArmorItem(ModItems.PIZZA_LEGGINGS);
         trimmedArmorItem(ModItems.PIZZA_BOOTS);
+
+        basicItem(ModItems.TOMATO.get());
+        basicItem(ModItems.TOMATO_SEEDS.get());
+        basicItem(ModItems.KETCHUP.get());
+        basicItem(ModItems.MUSTARD_SEEDS.get());
+        basicItem(ModItems.MUSTARD.get());
     }
 
     // Shoutout to El_Redstoniano for making this

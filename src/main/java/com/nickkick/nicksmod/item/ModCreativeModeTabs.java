@@ -43,6 +43,10 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.nicksmod.hot_dog_items"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.HOT_DOG);
+                        output.accept(ModItems.HOT_DOG_WITH_KETCHUP);
+                        output.accept(ModItems.HOT_DOG_WITH_MUSTARD);
+                        output.accept(ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD);
+
                         output.accept(ModItems.PIZZADINO_TOKEN);
                         output.accept(ModItems.PIZZA_SLICE);
                         output.accept(ModBlocks.PIZZA_BLOCK);
@@ -68,6 +72,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PIZZA_CHESTPLATE);
                         output.accept(ModItems.PIZZA_LEGGINGS);
                         output.accept(ModItems.PIZZA_BOOTS);
+
+                        output.accept(ModItems.TOMATO);
+                        output.accept(ModItems.TOMATO_SEEDS);
+                        output.accept(ModItems.KETCHUP);
+                        output.accept(ModItems.MUSTARD_SEEDS);
+                        output.accept(ModItems.MUSTARD);
                     })
                     .build());
 

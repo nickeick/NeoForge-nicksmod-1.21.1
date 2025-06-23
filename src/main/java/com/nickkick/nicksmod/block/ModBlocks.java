@@ -3,6 +3,8 @@ package com.nickkick.nicksmod.block;
 import com.nickkick.nicksmod.NicksMod;
 import com.nickkick.nicksmod.block.custom.HotDogLampBlock;
 import com.nickkick.nicksmod.block.custom.MagicBlock;
+import com.nickkick.nicksmod.block.custom.MustardCropBlock;
+import com.nickkick.nicksmod.block.custom.TomatoCropBlock;
 import com.nickkick.nicksmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -76,6 +78,12 @@ public class ModBlocks {
     public static final DeferredBlock<Block> HOT_DOG_LAMP = registerBlock("hot_dog_lamp",
             () -> new HotDogLampBlock(BlockBehaviour.Properties.of().strength(2f)
                     .lightLevel(state -> state.getValue(HotDogLampBlock.CLICKED) ? 15 : 0)));
+
+    public static final DeferredBlock<Block> TOMATO_CROP = registerBlock("tomato_crop",
+            () -> new TomatoCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS)));
+
+    public static final DeferredBlock<Block> MUSTARD_CROP = registerBlock("mustard_crop",
+            () -> new MustardCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
