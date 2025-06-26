@@ -7,10 +7,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
@@ -78,6 +80,60 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.KETCHUP);
                         output.accept(ModItems.MUSTARD_SEEDS);
                         output.accept(ModItems.MUSTARD);
+                    })
+                    .build());
+
+    public static final Supplier<CreativeModeTab> COLORFUL_BRICKS = CREATIVE_MODE_TAB.register("colorful_bricks_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LIGHT_BLUE_BRICKS))
+                    .title(Component.translatable("creativetab.nicksmod.colorful_bricks"))
+                    .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModBlocks.WHITE_BRICKS);
+                        output.accept(ModBlocks.LIGHT_GRAY_BRICKS);
+                        output.accept(ModBlocks.GRAY_BRICKS);
+                        output.accept(ModBlocks.BLACK_BRICKS);
+                        output.accept(ModBlocks.BROWN_BRICKS);
+                        output.accept(ModBlocks.RED_BRICKS);
+                        output.accept(ModBlocks.ORANGE_BRICKS);
+                        output.accept(ModBlocks.YELLOW_BRICKS);
+                        output.accept(ModBlocks.LIME_BRICKS);
+                        output.accept(ModBlocks.GREEN_BRICKS);
+                        output.accept(ModBlocks.CYAN_BRICKS);
+                        output.accept(ModBlocks.LIGHT_BLUE_BRICKS);
+                        output.accept(ModBlocks.PURPLE_BRICKS);
+                        output.accept(ModBlocks.MAGENTA_BRICKS);
+                        output.accept(ModBlocks.PINK_BRICKS);
+
+                        output.accept(ModItems.WHITE_BRICK);
+                        output.accept(ModItems.LIGHT_GRAY_BRICK);
+                        output.accept(ModItems.GRAY_BRICK);
+                        output.accept(ModItems.BLACK_BRICK);
+                        output.accept(ModItems.BROWN_BRICK);
+                        output.accept(ModItems.RED_BRICK);
+                        output.accept(ModItems.ORANGE_BRICK);
+                        output.accept(ModItems.YELLOW_BRICK);
+                        output.accept(ModItems.LIME_BRICK);
+                        output.accept(ModItems.GREEN_BRICK);
+                        output.accept(ModItems.CYAN_BRICK);
+                        output.accept(ModItems.LIGHT_BLUE_BRICK);
+                        output.accept(ModItems.PURPLE_BRICK);
+                        output.accept(ModItems.MAGENTA_BRICK);
+                        output.accept(ModItems.PINK_BRICK);
+
+                        output.accept(ModItems.WHITE_CLAY);
+                        output.accept(ModItems.LIGHT_GRAY_CLAY);
+                        output.accept(ModItems.GRAY_CLAY);
+                        output.accept(ModItems.BLACK_CLAY);
+                        output.accept(ModItems.BROWN_CLAY);
+                        output.accept(ModItems.RED_CLAY);
+                        output.accept(ModItems.ORANGE_CLAY);
+                        output.accept(ModItems.YELLOW_CLAY);
+                        output.accept(ModItems.LIME_CLAY);
+                        output.accept(ModItems.GREEN_CLAY);
+                        output.accept(ModItems.CYAN_CLAY);
+                        output.accept(ModItems.LIGHT_BLUE_CLAY);
+                        output.accept(ModItems.PURPLE_CLAY);
+                        output.accept(ModItems.MAGENTA_CLAY);
+                        output.accept(ModItems.PINK_CLAY);
                     })
                     .build());
 

@@ -62,6 +62,72 @@ public class ModItems {
     public static final DeferredItem<Item> MUSTARD = ITEMS.register("mustard",
             () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> WHITE_BRICK = ITEMS.register("white_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_GRAY_BRICK = ITEMS.register("light_gray_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GRAY_BRICK = ITEMS.register("gray_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLACK_BRICK = ITEMS.register("black_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BROWN_BRICK = ITEMS.register("brown_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> RED_BRICK = ITEMS.register("red_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ORANGE_BRICK = ITEMS.register("orange_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> YELLOW_BRICK = ITEMS.register("yellow_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIME_BRICK = ITEMS.register("lime_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GREEN_BRICK = ITEMS.register("green_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> CYAN_BRICK = ITEMS.register("cyan_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_BLUE_BRICK = ITEMS.register("light_blue_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLUE_BRICK = ITEMS.register("blue_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> PURPLE_BRICK = ITEMS.register("purple_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MAGENTA_BRICK = ITEMS.register("magenta_brick",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> PINK_BRICK = ITEMS.register("pink_brick",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> WHITE_CLAY = ITEMS.register("white_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_GRAY_CLAY = ITEMS.register("light_gray_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GRAY_CLAY = ITEMS.register("gray_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLACK_CLAY = ITEMS.register("black_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BROWN_CLAY = ITEMS.register("brown_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> RED_CLAY = ITEMS.register("red_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ORANGE_CLAY = ITEMS.register("orange_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> YELLOW_CLAY = ITEMS.register("yellow_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIME_CLAY = ITEMS.register("lime_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GREEN_CLAY = ITEMS.register("green_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> CYAN_CLAY = ITEMS.register("cyan_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> LIGHT_BLUE_CLAY = ITEMS.register("light_blue_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BLUE_CLAY = ITEMS.register("blue_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> PURPLE_CLAY = ITEMS.register("purple_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MAGENTA_CLAY = ITEMS.register("magenta_clay",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> PINK_CLAY = ITEMS.register("pink_clay",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

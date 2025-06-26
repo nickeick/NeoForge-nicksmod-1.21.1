@@ -174,15 +174,273 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_mustard", has(ModItems.MUSTARD))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.WHITE_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.WHITE_BRICK.get())
+                .unlockedBy("has_white_brick", has(ModItems.WHITE_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_GRAY_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.LIGHT_GRAY_BRICK.get())
+                .unlockedBy("has_light_gray_brick", has(ModItems.LIGHT_GRAY_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRAY_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.GRAY_BRICK.get())
+                .unlockedBy("has_gray_brick", has(ModItems.GRAY_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.BLACK_BRICK.get())
+                .unlockedBy("has_black_brick", has(ModItems.BLACK_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BROWN_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.BROWN_BRICK.get())
+                .unlockedBy("has_brown_brick", has(ModItems.BROWN_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.RED_BRICK.get())
+                .unlockedBy("has_red_brick", has(ModItems.RED_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.ORANGE_BRICK.get())
+                .unlockedBy("has_orange_brick", has(ModItems.ORANGE_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.YELLOW_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.YELLOW_BRICK.get())
+                .unlockedBy("has_yellow_brick", has(ModItems.YELLOW_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIME_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.LIME_BRICK.get())
+                .unlockedBy("has_lime_brick", has(ModItems.LIME_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GREEN_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.GREEN_BRICK.get())
+                .unlockedBy("has_green_brick", has(ModItems.GREEN_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CYAN_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.CYAN_BRICK.get())
+                .unlockedBy("has_cyan_brick", has(ModItems.CYAN_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_BLUE_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.LIGHT_BLUE_BRICK.get())
+                .unlockedBy("has_light_blue_brick", has(ModItems.LIGHT_BLUE_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLUE_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.BLUE_BRICK.get())
+                .unlockedBy("has_blue_brick", has(ModItems.BLUE_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PURPLE_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.PURPLE_BRICK.get())
+                .unlockedBy("has_purple_brick", has(ModItems.PURPLE_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGENTA_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.MAGENTA_BRICK.get())
+                .unlockedBy("has_magenta_brick", has(ModItems.MAGENTA_BRICK)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PINK_BRICKS.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModItems.PINK_BRICK.get())
+                .unlockedBy("has_pink_brick", has(ModItems.PINK_BRICK)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WHITE_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.WHITE_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_white_dye", has(Items.WHITE_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LIGHT_GRAY_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.LIGHT_GRAY_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_light_gray_dye", has(Items.LIGHT_GRAY_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GRAY_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.GRAY_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_gray_dye", has(Items.GRAY_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BLACK_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.BLACK_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_black_dye", has(Items.BLACK_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BROWN_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.BROWN_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_brown_dye", has(Items.BROWN_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.RED_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.RED_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_red_dye", has(Items.RED_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ORANGE_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.ORANGE_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_orange_dye", has(Items.ORANGE_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.YELLOW_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.YELLOW_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_yellow_dye", has(Items.YELLOW_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LIME_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.LIME_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_lime_dye", has(Items.LIME_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GREEN_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.GREEN_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_green_dye", has(Items.GREEN_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CYAN_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.CYAN_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_cyan_dye", has(Items.CYAN_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LIGHT_BLUE_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.LIGHT_BLUE_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_light_blue_dye", has(Items.LIGHT_BLUE_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BLUE_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.BLUE_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_blue_dye", has(Items.BLUE_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PURPLE_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.PURPLE_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_purple_dye", has(Items.PURPLE_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MAGENTA_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.MAGENTA_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_magenta_dye", has(Items.MAGENTA_DYE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PINK_CLAY.get(), 8)
+                .pattern("CCC")
+                .pattern("CXC")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .define('X', Items.PINK_DYE)
+                .unlockedBy("has_clay_ball", has(Items.CLAY_BALL))
+                .unlockedBy("has_pink_dye", has(Items.PINK_DYE))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 18)
                 .requires(ModBlocks.BISMUTH_BLOCK)
                 .unlockedBy("has_bismuth_block", has(ModBlocks.MAGIC_BLOCK))
                 .save(recipeOutput, "nicksmod:bismuth_from_magic_block");
 
 
-
         oreSmelting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
         oreBlasting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
+
+        oreSmelting(recipeOutput, List.of(ModItems.WHITE_CLAY), RecipeCategory.MISC, ModItems.WHITE_BRICK.get(), 0.3f, 200, "white_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.WHITE_CLAY), RecipeCategory.MISC, ModItems.WHITE_BRICK.get(), 0.3f, 100, "white_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.LIGHT_GRAY_CLAY), RecipeCategory.MISC, ModItems.LIGHT_GRAY_BRICK.get(), 0.3f, 200, "light_gray_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.LIGHT_GRAY_CLAY), RecipeCategory.MISC, ModItems.LIGHT_GRAY_BRICK.get(), 0.3f, 100, "light_gray_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.GRAY_CLAY), RecipeCategory.MISC, ModItems.GRAY_BRICK.get(), 0.3f, 200, "gray_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.GRAY_CLAY), RecipeCategory.MISC, ModItems.GRAY_BRICK.get(), 0.3f, 100, "gray_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.BLACK_CLAY), RecipeCategory.MISC, ModItems.BLACK_BRICK.get(), 0.3f, 200, "black_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.BLACK_CLAY), RecipeCategory.MISC, ModItems.BLACK_BRICK.get(), 0.3f, 100, "black_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.BROWN_CLAY), RecipeCategory.MISC, ModItems.BROWN_BRICK.get(), 0.3f, 200, "brown_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.BROWN_CLAY), RecipeCategory.MISC, ModItems.BROWN_BRICK.get(), 0.3f, 100, "brown_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.RED_CLAY), RecipeCategory.MISC, ModItems.RED_BRICK.get(), 0.3f, 200, "red_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.RED_CLAY), RecipeCategory.MISC, ModItems.RED_BRICK.get(), 0.3f, 100, "red_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.ORANGE_CLAY), RecipeCategory.MISC, ModItems.ORANGE_BRICK.get(), 0.3f, 200, "orange_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.ORANGE_CLAY), RecipeCategory.MISC, ModItems.ORANGE_BRICK.get(), 0.3f, 100, "orange_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.YELLOW_CLAY), RecipeCategory.MISC, ModItems.YELLOW_BRICK.get(), 0.3f, 200, "yellow_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.YELLOW_CLAY), RecipeCategory.MISC, ModItems.YELLOW_BRICK.get(), 0.3f, 100, "yellow_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.LIME_CLAY), RecipeCategory.MISC, ModItems.LIME_BRICK.get(), 0.3f, 200, "lime_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.LIME_CLAY), RecipeCategory.MISC, ModItems.LIME_BRICK.get(), 0.3f, 100, "lime_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.GREEN_CLAY), RecipeCategory.MISC, ModItems.GREEN_BRICK.get(), 0.3f, 200, "green_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.GREEN_CLAY), RecipeCategory.MISC, ModItems.GREEN_BRICK.get(), 0.3f, 100, "green_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.CYAN_CLAY), RecipeCategory.MISC, ModItems.CYAN_BRICK.get(), 0.3f, 200, "cyan_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.CYAN_CLAY), RecipeCategory.MISC, ModItems.CYAN_BRICK.get(), 0.3f, 100, "cyan_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.LIGHT_BLUE_CLAY), RecipeCategory.MISC, ModItems.LIGHT_BLUE_BRICK.get(), 0.3f, 200, "light_blue_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.LIGHT_BLUE_CLAY), RecipeCategory.MISC, ModItems.LIGHT_BLUE_BRICK.get(), 0.3f, 100, "light_blue_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.BLUE_CLAY), RecipeCategory.MISC, ModItems.BLUE_BRICK.get(), 0.3f, 200, "blue_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.BLUE_CLAY), RecipeCategory.MISC, ModItems.BLUE_BRICK.get(), 0.3f, 100, "blue_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.PURPLE_CLAY), RecipeCategory.MISC, ModItems.PURPLE_BRICK.get(), 0.3f, 200, "purple_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.PURPLE_CLAY), RecipeCategory.MISC, ModItems.PURPLE_BRICK.get(), 0.3f, 100, "purple_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.MAGENTA_CLAY), RecipeCategory.MISC, ModItems.MAGENTA_BRICK.get(), 0.3f, 200, "magenta_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.MAGENTA_CLAY), RecipeCategory.MISC, ModItems.MAGENTA_BRICK.get(), 0.3f, 100, "magenta_clay");
+        oreSmelting(recipeOutput, List.of(ModItems.PINK_CLAY), RecipeCategory.MISC, ModItems.PINK_BRICK.get(), 0.3f, 200, "pink_clay");
+        oreBlasting(recipeOutput, List.of(ModItems.PINK_CLAY), RecipeCategory.MISC, ModItems.PINK_BRICK.get(), 0.3f, 100, "pink_clay");
 
         stairBuilder(ModBlocks.HOT_DOG_STAIRS.get(), Ingredient.of(ModItems.HOT_DOG)).group("hot_dog")
                 .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG)).save(recipeOutput);

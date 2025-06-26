@@ -54,6 +54,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         makeCrop((CropBlock) ModBlocks.TOMATO_CROP.get(), "tomato_crop_stage", "tomato_crop_stage");
         makeCrop((CropBlock) ModBlocks.MUSTARD_CROP.get(), "mustard_crop_stage", "mustard_crop_stage");
+
+        blockWithItem(ModBlocks.WHITE_BRICKS);
+        blockWithItem(ModBlocks.LIGHT_GRAY_BRICKS);
+        blockWithItem(ModBlocks.GRAY_BRICKS);
+        blockWithItem(ModBlocks.BLACK_BRICKS);
+        blockWithItem(ModBlocks.BROWN_BRICKS);
+        blockWithItem(ModBlocks.RED_BRICKS);
+        blockWithItem(ModBlocks.ORANGE_BRICKS);
+        blockWithItem(ModBlocks.YELLOW_BRICKS);
+        blockWithItem(ModBlocks.LIME_BRICKS);
+        blockWithItem(ModBlocks.GREEN_BRICKS);
+        blockWithItem(ModBlocks.CYAN_BRICKS);
+        blockWithItem(ModBlocks.LIGHT_BLUE_BRICKS);
+        blockWithItem(ModBlocks.BLUE_BRICKS);
+        blockWithItem(ModBlocks.PURPLE_BRICKS);
+        blockWithItem(ModBlocks.MAGENTA_BRICKS);
+        blockWithItem(ModBlocks.PINK_BRICKS);
     }
 
     public void makeCrop(CropBlock block, String modelName, String textureName) {

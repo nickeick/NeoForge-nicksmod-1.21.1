@@ -68,6 +68,40 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.KETCHUP.get());
         basicItem(ModItems.MUSTARD_SEEDS.get());
         basicItem(ModItems.MUSTARD.get());
+
+        basicItem(ModItems.WHITE_BRICK.get());
+        basicItem(ModItems.LIGHT_GRAY_BRICK.get());
+        basicItem(ModItems.GRAY_BRICK.get());
+        basicItem(ModItems.BLACK_BRICK.get());
+        basicItem(ModItems.BROWN_BRICK.get());
+        basicItem(ModItems.RED_BRICK.get());
+        basicItem(ModItems.ORANGE_BRICK.get());
+        basicItem(ModItems.YELLOW_BRICK.get());
+        basicItem(ModItems.LIME_BRICK.get());
+        basicItem(ModItems.GREEN_BRICK.get());
+        basicItem(ModItems.CYAN_BRICK.get());
+        basicItem(ModItems.LIGHT_BLUE_BRICK.get());
+        basicItem(ModItems.BLUE_BRICK.get());
+        basicItem(ModItems.PURPLE_BRICK.get());
+        basicItem(ModItems.MAGENTA_BRICK.get());
+        basicItem(ModItems.PINK_BRICK.get());
+
+        basicItem(ModItems.WHITE_CLAY.get());
+        basicItem(ModItems.LIGHT_GRAY_CLAY.get());
+        basicItem(ModItems.GRAY_CLAY.get());
+        basicItem(ModItems.BLACK_CLAY.get());
+        basicItem(ModItems.BROWN_CLAY.get());
+        basicItem(ModItems.RED_CLAY.get());
+        basicItem(ModItems.ORANGE_CLAY.get());
+        basicItem(ModItems.YELLOW_CLAY.get());
+        basicItem(ModItems.LIME_CLAY.get());
+        basicItem(ModItems.GREEN_CLAY.get());
+        basicItem(ModItems.CYAN_CLAY.get());
+        basicItem(ModItems.LIGHT_BLUE_CLAY.get());
+        basicItem(ModItems.BLUE_CLAY.get());
+        basicItem(ModItems.PURPLE_CLAY.get());
+        basicItem(ModItems.MAGENTA_CLAY.get());
+        basicItem(ModItems.PINK_CLAY.get());
     }
 
     // Shoutout to El_Redstoniano for making this

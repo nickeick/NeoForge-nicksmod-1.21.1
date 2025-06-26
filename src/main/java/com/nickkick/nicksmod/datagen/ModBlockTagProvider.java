@@ -22,7 +22,23 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get())
                 .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
-                .add(ModBlocks.MAGIC_BLOCK.get());
+                .add(ModBlocks.MAGIC_BLOCK.get())
+                .add(ModBlocks.WHITE_BRICKS.get())
+                .add(ModBlocks.LIGHT_GRAY_BRICKS.get())
+                .add(ModBlocks.GRAY_BRICKS.get())
+                .add(ModBlocks.BLACK_BRICKS.get())
+                .add(ModBlocks.BROWN_BRICKS.get())
+                .add(ModBlocks.RED_BRICKS.get())
+                .add(ModBlocks.ORANGE_BRICKS.get())
+                .add(ModBlocks.YELLOW_BRICKS.get())
+                .add(ModBlocks.LIME_BRICKS.get())
+                .add(ModBlocks.GREEN_BRICKS.get())
+                .add(ModBlocks.CYAN_BRICKS.get())
+                .add(ModBlocks.LIGHT_BLUE_BRICKS.get())
+                .add(ModBlocks.BLUE_BRICKS.get())
+                .add(ModBlocks.PURPLE_BRICKS.get())
+                .add(ModBlocks.MAGENTA_BRICKS.get())
+                .add(ModBlocks.PINK_BRICKS.get());
 
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get());

@@ -72,6 +72,23 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         this.add(ModBlocks.MUSTARD_CROP.get(), this.createCropDrops(ModBlocks.MUSTARD_CROP.get(),
                 ModItems.MUSTARD_SEEDS.get(), ModItems.MUSTARD_SEEDS.get(), lootItemConditionBuilderMustard));
+
+        dropSelf(ModBlocks.WHITE_BRICKS.get());
+        dropSelf(ModBlocks.LIGHT_GRAY_BRICKS.get());
+        dropSelf(ModBlocks.GRAY_BRICKS.get());
+        dropSelf(ModBlocks.BLACK_BRICKS.get());
+        dropSelf(ModBlocks.BROWN_BRICKS.get());
+        dropSelf(ModBlocks.RED_BRICKS.get());
+        dropSelf(ModBlocks.ORANGE_BRICKS.get());
+        dropSelf(ModBlocks.YELLOW_BRICKS.get());
+        dropSelf(ModBlocks.LIME_BRICKS.get());
+        dropSelf(ModBlocks.GREEN_BRICKS.get());
+        dropSelf(ModBlocks.CYAN_BRICKS.get());
+        dropSelf(ModBlocks.LIGHT_BLUE_BRICKS.get());
+        dropSelf(ModBlocks.BLUE_BRICKS.get());
+        dropSelf(ModBlocks.PURPLE_BRICKS.get());
+        dropSelf(ModBlocks.MAGENTA_BRICKS.get());
+        dropSelf(ModBlocks.PINK_BRICKS.get());
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {
