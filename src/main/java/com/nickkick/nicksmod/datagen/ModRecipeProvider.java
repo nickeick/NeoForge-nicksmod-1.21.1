@@ -6,10 +6,10 @@ import com.nickkick.nicksmod.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.fml.common.Mod;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,6 +34,24 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 9)
                 .requires(ModBlocks.BISMUTH_BLOCK)
                 .unlockedBy("has_bismuth_block", has(ModBlocks.BISMUTH_BLOCK)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SKILL_TREE_BLOCK.get())
+                .pattern(" Z ")
+                .pattern("ZWZ")
+                .pattern("WWW")
+                .define('Z', ModItems.ZIRCON.get())
+                .define('W', ItemTags.PLANKS)
+                .unlockedBy("has_zircon", has(ModItems.ZIRCON))
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SKILL_STAFF.get())
+                .pattern(" Z ")
+                .pattern(" Z ")
+                .pattern(" Z ")
+                .define('Z', ModItems.ZIRCON.get())
+                .unlockedBy("has_zircon", has(ModItems.ZIRCON))
+                .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.HOT_DOG.get(), 2)
                 .pattern("#X#")
@@ -442,23 +460,90 @@ public class ModRecipeProvider extends RecipeProvider {
         oreSmelting(recipeOutput, List.of(ModItems.PINK_CLAY), RecipeCategory.MISC, ModItems.PINK_BRICK.get(), 0.3f, 200, "pink_clay");
         oreBlasting(recipeOutput, List.of(ModItems.PINK_CLAY), RecipeCategory.MISC, ModItems.PINK_BRICK.get(), 0.3f, 100, "pink_clay");
 
-        stairBuilder(ModBlocks.HOT_DOG_STAIRS.get(), Ingredient.of(ModItems.HOT_DOG)).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG)).save(recipeOutput);
-        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.HOT_DOG_SLAB.get(), ModItems.HOT_DOG.get());
-        buttonBuilder(ModBlocks.HOT_DOG_BUTTON.get(), Ingredient.of(ModItems.HOT_DOG.get())).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG.get())).save(recipeOutput);
-        pressurePlate(recipeOutput, ModBlocks.HOT_DOG_PRESSURE_PLATE.get(), ModItems.HOT_DOG.get());
+        stairBuilder(ModBlocks.HOT_DOG_STAIRS.get(), Ingredient.of(ModBlocks.HOT_DOG_BLOCK)).group("hot_dog")
+                .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK)).save(recipeOutput);
 
-        fenceBuilder(ModBlocks.HOT_DOG_FENCE.get(), Ingredient.of(ModItems.HOT_DOG.get())).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG.get())).save(recipeOutput);
-        fenceGateBuilder(ModBlocks.HOT_DOG_FENCE_GATE.get(), Ingredient.of(ModItems.HOT_DOG.get())).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG.get())).save(recipeOutput);
-        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.HOT_DOG_WALL.get(), ModItems.HOT_DOG.get());
+        stairBuilder(ModBlocks.WHITE_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.WHITE_BRICKS)).group("white_bricks")
+                .unlockedBy("has_white_bricks", has(ModBlocks.WHITE_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.LIGHT_GRAY_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.LIGHT_GRAY_BRICKS)).group("light_gray_bricks")
+                .unlockedBy("has_light_gray_bricks", has(ModBlocks.LIGHT_GRAY_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.GRAY_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.GRAY_BRICKS)).group("gray_bricks")
+                .unlockedBy("has_gray_bricks", has(ModBlocks.GRAY_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.BLACK_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.BLACK_BRICKS)).group("black_bricks")
+                .unlockedBy("has_black_bricks", has(ModBlocks.BLACK_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.BROWN_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.BROWN_BRICKS)).group("brown_bricks")
+                .unlockedBy("has_brown_bricks", has(ModBlocks.BROWN_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.RED_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.RED_BRICKS)).group("red_bricks")
+                .unlockedBy("has_red_bricks", has(ModBlocks.RED_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.ORANGE_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.ORANGE_BRICKS)).group("orange_bricks")
+                .unlockedBy("has_orange_bricks", has(ModBlocks.ORANGE_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.YELLOW_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.YELLOW_BRICKS)).group("yellow_bricks")
+                .unlockedBy("has_yellow_bricks", has(ModBlocks.YELLOW_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.LIME_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.LIME_BRICKS)).group("lime_bricks")
+                .unlockedBy("has_lime_bricks", has(ModBlocks.LIME_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.GREEN_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.GREEN_BRICKS)).group("green_bricks")
+                .unlockedBy("has_green_bricks", has(ModBlocks.GREEN_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.CYAN_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.CYAN_BRICKS)).group("cyan_bricks")
+                .unlockedBy("has_cyan_bricks", has(ModBlocks.CYAN_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.LIGHT_BLUE_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.LIGHT_BLUE_BRICKS)).group("light_blue_bricks")
+                .unlockedBy("has_light_blue_bricks", has(ModBlocks.LIGHT_BLUE_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.BLUE_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.BLUE_BRICKS)).group("blue_bricks")
+                .unlockedBy("has_blue_bricks", has(ModBlocks.BLUE_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.PURPLE_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.PURPLE_BRICKS)).group("purple_bricks")
+                .unlockedBy("has_purple_bricks", has(ModBlocks.PURPLE_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.MAGENTA_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.MAGENTA_BRICKS)).group("magenta_bricks")
+                .unlockedBy("has_magenta_bricks", has(ModBlocks.MAGENTA_BRICKS)).save(recipeOutput);
+        stairBuilder(ModBlocks.PINK_BRICKS_STAIRS.get(), Ingredient.of(ModBlocks.PINK_BRICKS)).group("pink_bricks")
+                .unlockedBy("has_pink_bricks", has(ModBlocks.PINK_BRICKS)).save(recipeOutput);
 
-        doorBuilder(ModBlocks.HOT_DOG_DOOR.get(), Ingredient.of(ModItems.HOT_DOG.get())).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG.get())).save(recipeOutput);
-        trapdoorBuilder(ModBlocks.HOT_DOG_TRAPDOOR.get(), Ingredient.of(ModItems.HOT_DOG.get())).group("hot_dog")
-                .unlockedBy("has_hot_dog", has(ModItems.HOT_DOG.get())).save(recipeOutput);
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.HOT_DOG_SLAB.get(), ModBlocks.HOT_DOG_BLOCK.get());
+
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.WHITE_BRICKS_SLAB.get(), ModBlocks.WHITE_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_GRAY_BRICKS_SLAB.get(), ModBlocks.LIGHT_GRAY_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRAY_BRICKS_SLAB.get(), ModBlocks.GRAY_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_BRICKS_SLAB.get(), ModBlocks.BLACK_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BROWN_BRICKS_SLAB.get(), ModBlocks.BROWN_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_BRICKS_SLAB.get(), ModBlocks.RED_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_BRICKS_SLAB.get(), ModBlocks.ORANGE_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.YELLOW_BRICKS_SLAB.get(), ModBlocks.YELLOW_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIME_BRICKS_SLAB.get(), ModBlocks.LIME_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GREEN_BRICKS_SLAB.get(), ModBlocks.GREEN_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CYAN_BRICKS_SLAB.get(), ModBlocks.CYAN_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_BLUE_BRICKS_SLAB.get(), ModBlocks.LIGHT_BLUE_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLUE_BRICKS_SLAB.get(), ModBlocks.BLUE_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.PURPLE_BRICKS_SLAB.get(), ModBlocks.PURPLE_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGENTA_BRICKS_SLAB.get(), ModBlocks.MAGENTA_BRICKS.get());
+        slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.PINK_BRICKS_SLAB.get(), ModBlocks.PINK_BRICKS.get());
+
+        buttonBuilder(ModBlocks.HOT_DOG_BUTTON.get(), Ingredient.of(ModBlocks.HOT_DOG_BLOCK.get())).group("hot_dog")
+                .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK.get())).save(recipeOutput);
+        pressurePlate(recipeOutput, ModBlocks.HOT_DOG_PRESSURE_PLATE.get(), ModBlocks.HOT_DOG_BLOCK.get());
+
+        fenceBuilder(ModBlocks.HOT_DOG_FENCE.get(), Ingredient.of(ModBlocks.HOT_DOG_BLOCK.get())).group("hot_dog")
+                .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK.get())).save(recipeOutput);
+        fenceGateBuilder(ModBlocks.HOT_DOG_FENCE_GATE.get(), Ingredient.of(ModBlocks.HOT_DOG_BLOCK.get())).group("hot_dog")
+                .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK.get())).save(recipeOutput);
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.HOT_DOG_WALL.get(), ModBlocks.HOT_DOG_BLOCK.get());
+
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.WHITE_BRICKS_WALL.get(), ModBlocks.WHITE_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_GRAY_BRICKS_WALL.get(), ModBlocks.LIGHT_GRAY_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GRAY_BRICKS_WALL.get(), ModBlocks.GRAY_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLACK_BRICKS_WALL.get(), ModBlocks.BLACK_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BROWN_BRICKS_WALL.get(), ModBlocks.BROWN_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RED_BRICKS_WALL.get(), ModBlocks.RED_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ORANGE_BRICKS_WALL.get(), ModBlocks.ORANGE_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.YELLOW_BRICKS_WALL.get(), ModBlocks.YELLOW_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIME_BRICKS_WALL.get(), ModBlocks.LIME_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.GREEN_BRICKS_WALL.get(), ModBlocks.GREEN_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.CYAN_BRICKS_WALL.get(), ModBlocks.CYAN_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIGHT_BLUE_BRICKS_WALL.get(), ModBlocks.LIGHT_BLUE_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLUE_BRICKS_WALL.get(), ModBlocks.BLUE_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.PURPLE_BRICKS_WALL.get(), ModBlocks.PURPLE_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGENTA_BRICKS_WALL.get(), ModBlocks.MAGENTA_BRICKS.get());
+        wall(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.PINK_BRICKS_WALL.get(), ModBlocks.PINK_BRICKS.get());
+
+        doorBuilder(ModBlocks.HOT_DOG_DOOR.get(), Ingredient.of(ModBlocks.HOT_DOG_BLOCK.get())).group("hot_dog")
+                .unlockedBy("has_hot_dog_block", has(ModBlocks.HOT_DOG_BLOCK.get())).save(recipeOutput);
     }
 
     protected static void oreSmelting(RecipeOutput recipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult,

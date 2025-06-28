@@ -8,8 +8,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -42,6 +39,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 block -> createOreDrop(ModBlocks.BISMUTH_ORE.get(), ModItems.RAW_BISMUTH.get()));
         add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get(),
                 block -> createMultipleOreDrops(ModBlocks.BISMUTH_DEEPSLATE_ORE.get(), ModItems.RAW_BISMUTH.get(), 2, 5));
+
+        add(ModBlocks.ZIRCON_ORE.get(),
+                block -> createOreDrop(ModBlocks.ZIRCON_ORE.get(), ModItems.ZIRCON.get()));
+        dropSelf(ModBlocks.SKILL_TREE_BLOCK.get());
 
         dropSelf(ModBlocks.HOT_DOG_STAIRS.get());
         add(ModBlocks.HOT_DOG_SLAB.get(),
@@ -89,6 +90,57 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.PURPLE_BRICKS.get());
         dropSelf(ModBlocks.MAGENTA_BRICKS.get());
         dropSelf(ModBlocks.PINK_BRICKS.get());
+
+        dropSelf(ModBlocks.WHITE_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.LIGHT_GRAY_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.GRAY_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.BLACK_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.BROWN_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.RED_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.ORANGE_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.YELLOW_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.LIME_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.GREEN_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.CYAN_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.LIGHT_BLUE_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.BLUE_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.PURPLE_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.MAGENTA_BRICKS_SLAB.get());
+        dropSelf(ModBlocks.PINK_BRICKS_SLAB.get());
+
+        dropSelf(ModBlocks.WHITE_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.LIGHT_GRAY_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.GRAY_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.BLACK_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.BROWN_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.RED_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.ORANGE_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.YELLOW_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.LIME_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.GREEN_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.CYAN_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.LIGHT_BLUE_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.BLUE_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.PURPLE_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.MAGENTA_BRICKS_STAIRS.get());
+        dropSelf(ModBlocks.PINK_BRICKS_STAIRS.get());
+
+        dropSelf(ModBlocks.WHITE_BRICKS_WALL.get());
+        dropSelf(ModBlocks.LIGHT_GRAY_BRICKS_WALL.get());
+        dropSelf(ModBlocks.GRAY_BRICKS_WALL.get());
+        dropSelf(ModBlocks.BLACK_BRICKS_WALL.get());
+        dropSelf(ModBlocks.BROWN_BRICKS_WALL.get());
+        dropSelf(ModBlocks.RED_BRICKS_WALL.get());
+        dropSelf(ModBlocks.ORANGE_BRICKS_WALL.get());
+        dropSelf(ModBlocks.YELLOW_BRICKS_WALL.get());
+        dropSelf(ModBlocks.LIME_BRICKS_WALL.get());
+        dropSelf(ModBlocks.GREEN_BRICKS_WALL.get());
+        dropSelf(ModBlocks.CYAN_BRICKS_WALL.get());
+        dropSelf(ModBlocks.LIGHT_BLUE_BRICKS_WALL.get());
+        dropSelf(ModBlocks.BLUE_BRICKS_WALL.get());
+        dropSelf(ModBlocks.PURPLE_BRICKS_WALL.get());
+        dropSelf(ModBlocks.MAGENTA_BRICKS_WALL.get());
+        dropSelf(ModBlocks.PINK_BRICKS_WALL.get());
     }
 
     protected LootTable.Builder createMultipleOreDrops(Block pBlock, Item item, float minDrops, float maxDrops) {

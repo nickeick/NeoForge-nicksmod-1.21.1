@@ -33,6 +33,13 @@ public class ModBlocks {
             () -> new DropExperienceBlock(UniformInt.of(2, 4),
                     BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
+    public static final DeferredBlock<Block> ZIRCON_ORE = registerBlock("zircon_ore",
+            () -> new DropExperienceBlock(UniformInt.of(2, 4),
+                    BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final DeferredBlock<Block> SKILL_TREE_BLOCK = registerBlock("skill_tree_block",
+            () -> new Block(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.WOOD)));
+
     public static final DeferredBlock<Block> BISMUTH_DEEPSLATE_ORE = registerBlock("bismuth_deepslate_ore",
             () -> new DropExperienceBlock(UniformInt.of(3, 4),
                     BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
@@ -120,6 +127,104 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PINK_BRICKS = registerBlock("pink_bricks",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
 
+    public static final DeferredBlock<SlabBlock> WHITE_BRICKS_SLAB = registerBlock("white_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> LIGHT_GRAY_BRICKS_SLAB = registerBlock("light_gray_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> GRAY_BRICKS_SLAB = registerBlock("gray_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> BLACK_BRICKS_SLAB = registerBlock("black_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> BROWN_BRICKS_SLAB = registerBlock("brown_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> RED_BRICKS_SLAB = registerBlock("red_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> ORANGE_BRICKS_SLAB = registerBlock("orange_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> YELLOW_BRICKS_SLAB = registerBlock("yellow_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> LIME_BRICKS_SLAB = registerBlock("lime_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> GREEN_BRICKS_SLAB = registerBlock("green_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> CYAN_BRICKS_SLAB = registerBlock("cyan_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> LIGHT_BLUE_BRICKS_SLAB = registerBlock("light_blue_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> BLUE_BRICKS_SLAB = registerBlock("blue_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> PURPLE_BRICKS_SLAB = registerBlock("purple_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> MAGENTA_BRICKS_SLAB = registerBlock("magenta_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<SlabBlock> PINK_BRICKS_SLAB = registerBlock("pink_bricks_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+
+    public static final DeferredBlock<StairBlock> WHITE_BRICKS_STAIRS = registerBlock("white_bricks_stairs",
+            () -> new StairBlock(ModBlocks.WHITE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> LIGHT_GRAY_BRICKS_STAIRS = registerBlock("light_gray_bricks_stairs",
+            () -> new StairBlock(ModBlocks.LIGHT_GRAY_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> GRAY_BRICKS_STAIRS = registerBlock("gray_bricks_stairs",
+            () -> new StairBlock(ModBlocks.GRAY_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> BLACK_BRICKS_STAIRS = registerBlock("black_bricks_stairs",
+            () -> new StairBlock(ModBlocks.BLACK_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> BROWN_BRICKS_STAIRS = registerBlock("brown_bricks_stairs",
+            () -> new StairBlock(ModBlocks.BROWN_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> RED_BRICKS_STAIRS = registerBlock("red_bricks_stairs",
+            () -> new StairBlock(ModBlocks.RED_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> ORANGE_BRICKS_STAIRS = registerBlock("orange_bricks_stairs",
+            () -> new StairBlock(ModBlocks.ORANGE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> YELLOW_BRICKS_STAIRS = registerBlock("yellow_bricks_stairs",
+            () -> new StairBlock(ModBlocks.YELLOW_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> LIME_BRICKS_STAIRS = registerBlock("lime_bricks_stairs",
+            () -> new StairBlock(ModBlocks.LIME_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> GREEN_BRICKS_STAIRS = registerBlock("green_bricks_stairs",
+            () -> new StairBlock(ModBlocks.GREEN_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> CYAN_BRICKS_STAIRS = registerBlock("cyan_bricks_stairs",
+            () -> new StairBlock(ModBlocks.CYAN_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> LIGHT_BLUE_BRICKS_STAIRS = registerBlock("light_blue_bricks_stairs",
+            () -> new StairBlock(ModBlocks.LIGHT_BLUE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> BLUE_BRICKS_STAIRS = registerBlock("blue_bricks_stairs",
+            () -> new StairBlock(ModBlocks.BLUE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> PURPLE_BRICKS_STAIRS = registerBlock("purple_bricks_stairs",
+            () -> new StairBlock(ModBlocks.PURPLE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> MAGENTA_BRICKS_STAIRS = registerBlock("magenta_bricks_stairs",
+            () -> new StairBlock(ModBlocks.MAGENTA_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<StairBlock> PINK_BRICKS_STAIRS = registerBlock("pink_bricks_stairs",
+            () -> new StairBlock(ModBlocks.PINK_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+
+    public static final DeferredBlock<WallBlock> WHITE_BRICKS_WALL = registerBlock("white_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> LIGHT_GRAY_BRICKS_WALL = registerBlock("light_gray_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> GRAY_BRICKS_WALL = registerBlock("gray_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> BLACK_BRICKS_WALL = registerBlock("black_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> BROWN_BRICKS_WALL = registerBlock("brown_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> RED_BRICKS_WALL = registerBlock("red_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> ORANGE_BRICKS_WALL = registerBlock("orange_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> YELLOW_BRICKS_WALL = registerBlock("yellow_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> LIME_BRICKS_WALL = registerBlock("lime_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> GREEN_BRICKS_WALL = registerBlock("green_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> CYAN_BRICKS_WALL = registerBlock("cyan_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> LIGHT_BLUE_BRICKS_WALL = registerBlock("light_blue_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> BLUE_BRICKS_WALL = registerBlock("blue_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> PURPLE_BRICKS_WALL = registerBlock("purple_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> MAGENTA_BRICKS_WALL = registerBlock("magenta_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> PINK_BRICKS_WALL = registerBlock("pink_bricks_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);

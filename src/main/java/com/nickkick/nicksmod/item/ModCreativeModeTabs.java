@@ -25,6 +25,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.BISMUTH);
                         output.accept(ModItems.RAW_BISMUTH);
                         output.accept(ModItems.CHISEL);
+                        output.accept(ModItems.ZIRCON);
+                        output.accept(ModItems.SKILL_STAFF);
                     })
                     .build());
 
@@ -37,6 +39,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BISMUTH_ORE);
                         output.accept(ModBlocks.BISMUTH_DEEPSLATE_ORE);
                         output.accept(ModBlocks.MAGIC_BLOCK);
+                        output.accept(ModBlocks.ZIRCON_ORE);
+                        output.accept(ModBlocks.SKILL_TREE_BLOCK);
                     })
                     .build());
 
@@ -102,6 +106,54 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.PURPLE_BRICKS);
                         output.accept(ModBlocks.MAGENTA_BRICKS);
                         output.accept(ModBlocks.PINK_BRICKS);
+
+                        output.accept(ModBlocks.WHITE_BRICKS_SLAB);
+                        output.accept(ModBlocks.LIGHT_GRAY_BRICKS_SLAB);
+                        output.accept(ModBlocks.GRAY_BRICKS_SLAB);
+                        output.accept(ModBlocks.BLACK_BRICKS_SLAB);
+                        output.accept(ModBlocks.BROWN_BRICKS_SLAB);
+                        output.accept(ModBlocks.RED_BRICKS_SLAB);
+                        output.accept(ModBlocks.ORANGE_BRICKS_SLAB);
+                        output.accept(ModBlocks.YELLOW_BRICKS_SLAB);
+                        output.accept(ModBlocks.LIME_BRICKS_SLAB);
+                        output.accept(ModBlocks.GREEN_BRICKS_SLAB);
+                        output.accept(ModBlocks.CYAN_BRICKS_SLAB);
+                        output.accept(ModBlocks.LIGHT_BLUE_BRICKS_SLAB);
+                        output.accept(ModBlocks.PURPLE_BRICKS_SLAB);
+                        output.accept(ModBlocks.MAGENTA_BRICKS_SLAB);
+                        output.accept(ModBlocks.PINK_BRICKS_SLAB);
+
+                        output.accept(ModBlocks.WHITE_BRICKS_STAIRS);
+                        output.accept(ModBlocks.LIGHT_GRAY_BRICKS_STAIRS);
+                        output.accept(ModBlocks.GRAY_BRICKS_STAIRS);
+                        output.accept(ModBlocks.BLACK_BRICKS_STAIRS);
+                        output.accept(ModBlocks.BROWN_BRICKS_STAIRS);
+                        output.accept(ModBlocks.RED_BRICKS_STAIRS);
+                        output.accept(ModBlocks.ORANGE_BRICKS_STAIRS);
+                        output.accept(ModBlocks.YELLOW_BRICKS_STAIRS);
+                        output.accept(ModBlocks.LIME_BRICKS_STAIRS);
+                        output.accept(ModBlocks.GREEN_BRICKS_STAIRS);
+                        output.accept(ModBlocks.CYAN_BRICKS_STAIRS);
+                        output.accept(ModBlocks.LIGHT_BLUE_BRICKS_STAIRS);
+                        output.accept(ModBlocks.PURPLE_BRICKS_STAIRS);
+                        output.accept(ModBlocks.MAGENTA_BRICKS_STAIRS);
+                        output.accept(ModBlocks.PINK_BRICKS_STAIRS);
+
+                        output.accept(ModBlocks.WHITE_BRICKS_WALL);
+                        output.accept(ModBlocks.LIGHT_GRAY_BRICKS_WALL);
+                        output.accept(ModBlocks.GRAY_BRICKS_WALL);
+                        output.accept(ModBlocks.BLACK_BRICKS_WALL);
+                        output.accept(ModBlocks.BROWN_BRICKS_WALL);
+                        output.accept(ModBlocks.RED_BRICKS_WALL);
+                        output.accept(ModBlocks.ORANGE_BRICKS_WALL);
+                        output.accept(ModBlocks.YELLOW_BRICKS_WALL);
+                        output.accept(ModBlocks.LIME_BRICKS_WALL);
+                        output.accept(ModBlocks.GREEN_BRICKS_WALL);
+                        output.accept(ModBlocks.CYAN_BRICKS_WALL);
+                        output.accept(ModBlocks.LIGHT_BLUE_BRICKS_WALL);
+                        output.accept(ModBlocks.PURPLE_BRICKS_WALL);
+                        output.accept(ModBlocks.MAGENTA_BRICKS_WALL);
+                        output.accept(ModBlocks.PINK_BRICKS_WALL);
 
                         output.accept(ModItems.WHITE_BRICK);
                         output.accept(ModItems.LIGHT_GRAY_BRICK);

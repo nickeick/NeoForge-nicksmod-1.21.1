@@ -22,6 +22,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get())
                 .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
+                .add(ModBlocks.ZIRCON_ORE.get())
                 .add(ModBlocks.MAGIC_BLOCK.get())
                 .add(ModBlocks.WHITE_BRICKS.get())
                 .add(ModBlocks.LIGHT_GRAY_BRICKS.get())
@@ -38,16 +39,87 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLUE_BRICKS.get())
                 .add(ModBlocks.PURPLE_BRICKS.get())
                 .add(ModBlocks.MAGENTA_BRICKS.get())
-                .add(ModBlocks.PINK_BRICKS.get());
+                .add(ModBlocks.PINK_BRICKS.get())
+
+                .add(ModBlocks.WHITE_BRICKS_SLAB.get())
+                .add(ModBlocks.LIGHT_GRAY_BRICKS_SLAB.get())
+                .add(ModBlocks.GRAY_BRICKS_SLAB.get())
+                .add(ModBlocks.BLACK_BRICKS_SLAB.get())
+                .add(ModBlocks.BROWN_BRICKS_SLAB.get())
+                .add(ModBlocks.RED_BRICKS_SLAB.get())
+                .add(ModBlocks.ORANGE_BRICKS_SLAB.get())
+                .add(ModBlocks.YELLOW_BRICKS_SLAB.get())
+                .add(ModBlocks.LIME_BRICKS_SLAB.get())
+                .add(ModBlocks.GREEN_BRICKS_SLAB.get())
+                .add(ModBlocks.CYAN_BRICKS_SLAB.get())
+                .add(ModBlocks.LIGHT_BLUE_BRICKS_SLAB.get())
+                .add(ModBlocks.BLUE_BRICKS_SLAB.get())
+                .add(ModBlocks.PURPLE_BRICKS_SLAB.get())
+                .add(ModBlocks.MAGENTA_BRICKS_SLAB.get())
+                .add(ModBlocks.PINK_BRICKS_SLAB.get())
+
+                .add(ModBlocks.WHITE_BRICKS_STAIRS.get())
+                .add(ModBlocks.LIGHT_GRAY_BRICKS_STAIRS.get())
+                .add(ModBlocks.GRAY_BRICKS_STAIRS.get())
+                .add(ModBlocks.BLACK_BRICKS_STAIRS.get())
+                .add(ModBlocks.BROWN_BRICKS_STAIRS.get())
+                .add(ModBlocks.RED_BRICKS_STAIRS.get())
+                .add(ModBlocks.ORANGE_BRICKS_STAIRS.get())
+                .add(ModBlocks.YELLOW_BRICKS_STAIRS.get())
+                .add(ModBlocks.LIME_BRICKS_STAIRS.get())
+                .add(ModBlocks.GREEN_BRICKS_STAIRS.get())
+                .add(ModBlocks.CYAN_BRICKS_STAIRS.get())
+                .add(ModBlocks.LIGHT_BLUE_BRICKS_STAIRS.get())
+                .add(ModBlocks.BLUE_BRICKS_STAIRS.get())
+                .add(ModBlocks.PURPLE_BRICKS_STAIRS.get())
+                .add(ModBlocks.MAGENTA_BRICKS_STAIRS.get())
+                .add(ModBlocks.PINK_BRICKS_STAIRS.get())
+
+                .add(ModBlocks.WHITE_BRICKS_WALL.get())
+                .add(ModBlocks.LIGHT_GRAY_BRICKS_WALL.get())
+                .add(ModBlocks.GRAY_BRICKS_WALL.get())
+                .add(ModBlocks.BLACK_BRICKS_WALL.get())
+                .add(ModBlocks.BROWN_BRICKS_WALL.get())
+                .add(ModBlocks.RED_BRICKS_WALL.get())
+                .add(ModBlocks.ORANGE_BRICKS_WALL.get())
+                .add(ModBlocks.YELLOW_BRICKS_WALL.get())
+                .add(ModBlocks.LIME_BRICKS_WALL.get())
+                .add(ModBlocks.GREEN_BRICKS_WALL.get())
+                .add(ModBlocks.CYAN_BRICKS_WALL.get())
+                .add(ModBlocks.LIGHT_BLUE_BRICKS_WALL.get())
+                .add(ModBlocks.BLUE_BRICKS_WALL.get())
+                .add(ModBlocks.PURPLE_BRICKS_WALL.get())
+                .add(ModBlocks.MAGENTA_BRICKS_WALL.get())
+                .add(ModBlocks.PINK_BRICKS_WALL.get());
 
         tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get());
+                .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
+                .add(ModBlocks.ZIRCON_ORE.get());
+
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.SKILL_TREE_BLOCK.get());
 
         tag(BlockTags.FENCES)
                 .add(ModBlocks.HOT_DOG_FENCE.get());
         tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.HOT_DOG_FENCE_GATE.get());
         tag(BlockTags.WALLS)
-                .add(ModBlocks.HOT_DOG_WALL.get());
+                .add(ModBlocks.HOT_DOG_WALL.get())
+                .add(ModBlocks.WHITE_BRICKS_WALL.get())
+                .add(ModBlocks.LIGHT_GRAY_BRICKS_WALL.get())
+                .add(ModBlocks.GRAY_BRICKS_WALL.get())
+                .add(ModBlocks.BLACK_BRICKS_WALL.get())
+                .add(ModBlocks.BROWN_BRICKS_WALL.get())
+                .add(ModBlocks.RED_BRICKS_WALL.get())
+                .add(ModBlocks.ORANGE_BRICKS_WALL.get())
+                .add(ModBlocks.YELLOW_BRICKS_WALL.get())
+                .add(ModBlocks.LIME_BRICKS_WALL.get())
+                .add(ModBlocks.GREEN_BRICKS_WALL.get())
+                .add(ModBlocks.CYAN_BRICKS_WALL.get())
+                .add(ModBlocks.LIGHT_BLUE_BRICKS_WALL.get())
+                .add(ModBlocks.BLUE_BRICKS_WALL.get())
+                .add(ModBlocks.PURPLE_BRICKS_WALL.get())
+                .add(ModBlocks.MAGENTA_BRICKS_WALL.get())
+                .add(ModBlocks.PINK_BRICKS_WALL.get());
     }
 }

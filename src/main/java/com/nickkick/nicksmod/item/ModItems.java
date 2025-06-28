@@ -4,6 +4,7 @@ import com.nickkick.nicksmod.NicksMod;
 import com.nickkick.nicksmod.block.ModBlocks;
 import com.nickkick.nicksmod.item.custom.ModArmorItem;
 import com.nickkick.nicksmod.item.custom.ChiselItem;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -21,6 +22,12 @@ public class ModItems {
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             () -> new ChiselItem(new Item.Properties().durability(32)));
+
+    public static final DeferredItem<Item> ZIRCON = ITEMS.register("zircon",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> SKILL_STAFF = ITEMS.register("skill_staff",
+            () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> HOT_DOG = ITEMS.register("hot_dog",
             () -> new Item(new Item.Properties().food(ModFoodProperties.HOT_DOG)));

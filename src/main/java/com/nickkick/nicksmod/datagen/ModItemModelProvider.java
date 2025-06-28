@@ -42,6 +42,9 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.BISMUTH.get());
         basicItem(ModItems.RAW_BISMUTH.get());
+        basicItem(ModItems.ZIRCON.get());
+        basicItem(ModItems.SKILL_STAFF.get());
+
         basicItem(ModItems.HOT_DOG.get());
         basicItem(ModItems.HOT_DOG_WITH_KETCHUP.get());
         basicItem(ModItems.HOT_DOG_WITH_MUSTARD.get());
@@ -52,6 +55,24 @@ public class ModItemModelProvider extends ItemModelProvider {
         buttonItem(ModBlocks.HOT_DOG_BUTTON, ModBlocks.HOT_DOG_BLOCK);
         fenceItem(ModBlocks.HOT_DOG_FENCE, ModBlocks.HOT_DOG_BLOCK);
         wallItem(ModBlocks.HOT_DOG_WALL, ModBlocks.HOT_DOG_BLOCK);
+
+        wallItem(ModBlocks.WHITE_BRICKS_WALL, ModBlocks.WHITE_BRICKS);
+        wallItem(ModBlocks.LIGHT_GRAY_BRICKS_WALL, ModBlocks.LIGHT_GRAY_BRICKS);
+        wallItem(ModBlocks.GRAY_BRICKS_WALL, ModBlocks.GRAY_BRICKS);
+        wallItem(ModBlocks.BLACK_BRICKS_WALL, ModBlocks.BLACK_BRICKS);
+        wallItem(ModBlocks.BROWN_BRICKS_WALL, ModBlocks.BROWN_BRICKS);
+        wallItem(ModBlocks.RED_BRICKS_WALL, ModBlocks.RED_BRICKS);
+        wallItem(ModBlocks.ORANGE_BRICKS_WALL, ModBlocks.ORANGE_BRICKS);
+        wallItem(ModBlocks.YELLOW_BRICKS_WALL, ModBlocks.YELLOW_BRICKS);
+        wallItem(ModBlocks.LIME_BRICKS_WALL, ModBlocks.LIME_BRICKS);
+        wallItem(ModBlocks.GREEN_BRICKS_WALL, ModBlocks.GREEN_BRICKS);
+        wallItem(ModBlocks.CYAN_BRICKS_WALL, ModBlocks.CYAN_BRICKS);
+        wallItem(ModBlocks.LIGHT_BLUE_BRICKS_WALL, ModBlocks.LIGHT_BLUE_BRICKS);
+        wallItem(ModBlocks.BLUE_BRICKS_WALL, ModBlocks.BLUE_BRICKS);
+        wallItem(ModBlocks.PURPLE_BRICKS_WALL, ModBlocks.PURPLE_BRICKS);
+        wallItem(ModBlocks.MAGENTA_BRICKS_WALL, ModBlocks.MAGENTA_BRICKS);
+        wallItem(ModBlocks.PINK_BRICKS_WALL, ModBlocks.PINK_BRICKS);
+
 
         basicItem(ModBlocks.HOT_DOG_DOOR.asItem());
 
