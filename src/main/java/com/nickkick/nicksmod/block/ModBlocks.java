@@ -1,10 +1,7 @@
 package com.nickkick.nicksmod.block;
 
 import com.nickkick.nicksmod.NicksMod;
-import com.nickkick.nicksmod.block.custom.HotDogLampBlock;
-import com.nickkick.nicksmod.block.custom.MagicBlock;
-import com.nickkick.nicksmod.block.custom.MustardCropBlock;
-import com.nickkick.nicksmod.block.custom.TomatoCropBlock;
+import com.nickkick.nicksmod.block.custom.*;
 import com.nickkick.nicksmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -38,7 +35,7 @@ public class ModBlocks {
                     BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
     public static final DeferredBlock<Block> SKILL_TREE_BLOCK = registerBlock("skill_tree_block",
-            () -> new Block(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.WOOD)));
+            () -> new SkillTreeBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.WOOD)));
 
     public static final DeferredBlock<Block> BISMUTH_DEEPSLATE_ORE = registerBlock("bismuth_deepslate_ore",
             () -> new DropExperienceBlock(UniformInt.of(3, 4),
@@ -77,8 +74,6 @@ public class ModBlocks {
     public static final DeferredBlock<DoorBlock> HOT_DOG_DOOR = registerBlock("hot_dog_door",
             () -> new DoorBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2f).noOcclusion()));
 
-    public static final DeferredBlock<TrapDoorBlock> HOT_DOG_TRAPDOOR = registerBlock("hot_dog_trapdoor",
-            () -> new TrapDoorBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2f).noOcclusion()));
 
     public static final DeferredBlock<Block> PIZZA_BLOCK = registerBlock("pizza_block",
             () -> new Block(BlockBehaviour.Properties.of()

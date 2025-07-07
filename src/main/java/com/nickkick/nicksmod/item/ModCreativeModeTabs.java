@@ -70,7 +70,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.HOT_DOG_WALL);
 
                         output.accept(ModBlocks.HOT_DOG_DOOR);
-                        output.accept(ModBlocks.HOT_DOG_TRAPDOOR);
 
                         output.accept(ModBlocks.HOT_DOG_LAMP);
 

@@ -6,6 +6,7 @@
   "item.nicksmod.zircon": "Zircon",
   "block.nicksmod.zircon_ore": "Zircon Ore",
   "block.nicksmod.skill_tree_block": "Skill Tree Block",
+  "tooltip.nicksmod.skill_tree_block.tooltip": "Right-click this block to access your skill tree",
   "item.nicksmod.skill_staff": "Skill Staff",
 
   "item.nicksmod.hot_dog": "Hot Dog",
@@ -23,7 +24,6 @@
   "block.nicksmod.hot_dog_fence_gate": "Hot Dog Fence Gate",
   "block.nicksmod.hot_dog_wall": "Hot Dog Wall",
   "block.nicksmod.hot_dog_door": "Hot Dog Door",
-  "block.nicksmod.hot_dog_trapdoor": "Hot Dog Trapdoor",
   "block.nicksmod.hot_dog_lamp": "Hot Dog Lamp",
 
   "item.nicksmod.pizzadino_token": "Pizzadino Token",

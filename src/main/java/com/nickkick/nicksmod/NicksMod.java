@@ -1,6 +1,8 @@
 package com.nickkick.nicksmod;
 
 import com.nickkick.nicksmod.block.ModBlocks;
+import com.nickkick.nicksmod.block.entity.ModBlockEntities;
+import com.nickkick.nicksmod.component.ModDataComponents;
 import com.nickkick.nicksmod.item.ModCreativeModeTabs;
 import com.nickkick.nicksmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -43,6 +45,9 @@ public class NicksMod {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModBlockEntities.register(modEventBus);
+        ModDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

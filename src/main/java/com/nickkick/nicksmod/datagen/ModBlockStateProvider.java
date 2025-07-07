@@ -46,13 +46,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         wallBlock(ModBlocks.HOT_DOG_WALL.get(), blockTexture(ModBlocks.HOT_DOG_BLOCK.get()));
 
         doorBlockWithRenderType(ModBlocks.HOT_DOG_DOOR.get(), modLoc("block/hot_dog_door_bottom"), modLoc("block/hot_dog_door_top"), "cutout");
-        trapdoorBlockWithRenderType(ModBlocks.HOT_DOG_TRAPDOOR.get(), modLoc("block/hot_dog_trapdoor"), true, "cutout");
 
         blockItem(ModBlocks.HOT_DOG_STAIRS);
         blockItem(ModBlocks.HOT_DOG_SLAB);
         blockItem(ModBlocks.HOT_DOG_PRESSURE_PLATE);
         blockItem(ModBlocks.HOT_DOG_FENCE_GATE);
-        blockItem(ModBlocks.HOT_DOG_TRAPDOOR, "_button");
 
         customLamp();
 

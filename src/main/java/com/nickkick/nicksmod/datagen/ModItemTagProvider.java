@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,6 +24,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(ModTags.Items.TRANSFORMABLE_ITEMS)
                 .add(ModItems.BISMUTH.get());
+
+        tag(ModTags.Items.STAT_TRACKABLE_ITEMS)
+                .add(ModItems.SKILL_STAFF.get());
 
         this.tag(ItemTags.TRIMMABLE_ARMOR)
                 .add(ModItems.PIZZA_HELMET.get())
