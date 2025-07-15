@@ -17,6 +17,21 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MINED_BLOCKS = register("mined_blocks",
             builder -> builder.persistent(Codec.INT));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> CHOPPED_BLOCKS = register("chopped_blocks",
+            builder -> builder.persistent(Codec.INT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DUG_BLOCKS = register("dug_blocks",
+            builder -> builder.persistent(Codec.INT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> SWORD_ATTACKS = register("sword_attacks",
+            builder -> builder.persistent(Codec.INT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> AXE_ATTACKS = register("axe_attacks",
+            builder -> builder.persistent(Codec.INT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> UNARMED_ATTACKS = register("unarmed_attacks",
+            builder -> builder.persistent(Codec.INT));
+
     private static <T>DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                           UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());

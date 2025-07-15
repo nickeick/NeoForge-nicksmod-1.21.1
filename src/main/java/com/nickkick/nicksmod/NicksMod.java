@@ -3,9 +3,22 @@ package com.nickkick.nicksmod;
 import com.nickkick.nicksmod.block.ModBlocks;
 import com.nickkick.nicksmod.block.entity.ModBlockEntities;
 import com.nickkick.nicksmod.component.ModDataComponents;
+import com.nickkick.nicksmod.data_map.ModDataMapTypes;
+import com.nickkick.nicksmod.data_map.network.ClientPayloadHandler;
 import com.nickkick.nicksmod.item.ModCreativeModeTabs;
 import com.nickkick.nicksmod.item.ModItems;
+import com.nickkick.nicksmod.player.ModPlayerData;
+import com.nickkick.nicksmod.screen.ModMenuTypes;
+import com.nickkick.nicksmod.screen.custom.SkillTreeScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.HandlerThread;
+import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -48,6 +61,8 @@ public class NicksMod {
 
         ModBlockEntities.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+        ModPlayerData.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -80,6 +95,20 @@ public class NicksMod {
     {
     }
 
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+    public static class ServerModEvents {
+        @SubscribeEvent
+        public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
+            event.registrar(NicksMod.MOD_ID)
+                    .executesOn(HandlerThread.NETWORK)
+                    .playToClient(
+                            ModDataMapTypes.SkillData.TYPE,
+                            ModDataMapTypes.SkillData.STREAM_CODEC,
+                            ClientPayloadHandler::handleOnNetwork
+                    );
+        }
+    }
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
@@ -87,6 +116,11 @@ public class NicksMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event) {
+            event.register(ModMenuTypes.SKILL_TREE_MENU.get(), SkillTreeScreen::new);
         }
     }
 }
