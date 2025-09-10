@@ -156,5 +156,7 @@
   "creativetab.nicksmod.bismuth_items": "Bismuth Items",
   "creativetab.nicksmod.bismuth_blocks": "Bismuth Blocks",
   "creativetab.nicksmod.hot_dog_items": "Hot Dogs",
-  "creativetab.nicksmod.colorful_bricks": "Colorful Bricks"
+  "creativetab.nicksmod.colorful_bricks": "Colorful Bricks",
+
+  "key.nicksmod.areamode": "Change Your Tool To 3x3 Area Mode"
 }

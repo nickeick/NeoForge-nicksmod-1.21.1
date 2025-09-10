@@ -5,20 +5,18 @@ import com.nickkick.nicksmod.block.entity.ModBlockEntities;
 import com.nickkick.nicksmod.component.ModDataComponents;
 import com.nickkick.nicksmod.data_map.ModDataMapTypes;
 import com.nickkick.nicksmod.data_map.network.ClientPayloadHandler;
+import com.nickkick.nicksmod.data_map.network.ServerPayloadHandler;
 import com.nickkick.nicksmod.item.ModCreativeModeTabs;
 import com.nickkick.nicksmod.item.ModItems;
+import com.nickkick.nicksmod.player.ModKeyMappings;
 import com.nickkick.nicksmod.player.ModPlayerData;
 import com.nickkick.nicksmod.screen.ModMenuTypes;
 import com.nickkick.nicksmod.screen.custom.SkillTreeScreen;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.HandlerThread;
-import net.neoforged.neoforge.registries.datamaps.DataMapType;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -35,6 +33,8 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import static com.nickkick.nicksmod.player.ModPlayerData.AREA_MODE_ENABLED;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(NicksMod.MOD_ID)
@@ -105,6 +105,20 @@ public class NicksMod {
                             ModDataMapTypes.SkillData.TYPE,
                             ModDataMapTypes.SkillData.STREAM_CODEC,
                             ClientPayloadHandler::handleOnNetwork
+                    )
+                    .playToServer(
+                            ModDataMapTypes.BonusData.TYPE,
+                            ModDataMapTypes.BonusData.STREAM_CODEC,
+                            ServerPayloadHandler::handleOnNetwork
+                    )
+                    .playToServer(
+                            ModDataMapTypes.ToggleAbilityPayload.TYPE,
+                            ModDataMapTypes.ToggleAbilityPayload.CODEC,
+                            (toggleAbilityPayload, iPayloadContext) -> {
+                                var player = iPayloadContext.player();
+                                var data = player.getData(AREA_MODE_ENABLED);
+                                data.toggle();
+                            }
                     );
         }
     }
@@ -121,6 +135,11 @@ public class NicksMod {
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.SKILL_TREE_MENU.get(), SkillTreeScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+            event.register(ModKeyMappings.AREA_MODE_MAPPING);
         }
     }
 }

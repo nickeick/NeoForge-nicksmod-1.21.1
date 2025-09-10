@@ -10,16 +10,18 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Map;
 import java.util.function.Supplier;
-
-import static com.nickkick.nicksmod.player.ModPlayerData.SKILL_NAMES;
 
 public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     private static final ResourceLocation GUI_TEXTURE =
@@ -63,12 +65,26 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         this.renderTooltip(guiGraphics, mouseX, mouseY);
         this.addRenderableWidget(new SkillTreeCloseButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + imageHeight - 25));
         int iter = 0;
-        for (Map.Entry<String, Supplier<AttachmentType<ModDataMapTypes.SkillData>>> entry : SKILL_NAMES.entrySet()) {
+        for (Map.Entry<String, Supplier<AttachmentType<ModDataMapTypes.SkillData>>> entry : ModPlayerData.SKILL_NAMES.entrySet()) {
             int finalIter = iter;
             this.addRenderableWidget(Button.builder(Component.literal(entry.getKey().toUpperCase()), btn -> {
+                this.clearWidgets();
                 currentTab = finalIter;
             }).pos(this.leftPos - 55, this.topPos + iter*25).size(50, 20).build());
             iter = iter + 1;
+        }
+        if (currentTab == 0) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Mining Bonus", "mining", 10));
+        } else if (currentTab == 1) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Chopping Bonus", "chopping", 10));
+        } else if (currentTab == 2) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Digging Bonus", "digging", 10));
+        } else if (currentTab == 3) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Swords Bonus", "swords", 10));
+        } else if (currentTab == 4) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Axes Bonus", "axes", 10));
+        } else if (currentTab == 5) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Unarmed Bonus", "unarmed", 10));
         }
     }
 
@@ -111,8 +127,32 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         }
 
         @Override
-        protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+        protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {}
+    }
 
+    class SkillTreeBonusButton extends AbstractButton {
+        private final int cost;
+        private final AttachmentType<ModDataMapTypes.SkillData> skill;
+        private final String skillName;
+
+        public SkillTreeBonusButton(int x, int y, String buttonName, String skillName, int cost) {
+            super(x, y, 100, 20, Component.literal(buttonName + ": " + cost));
+            this.skillName = skillName;
+            this.skill = ModPlayerData.SKILL_NAMES.get(skillName).get();
+            this.cost = cost;
         }
+
+        @Override
+        public void onPress() {
+            ModDataMapTypes.SkillData skillData = SkillTreeScreen.this.player.getData(this.skill);
+            if (skillData.skill() >= this.cost) {
+                //SkillTreeScreen.this.player.closeContainer();
+                PacketDistributor.sendToServer(new ModDataMapTypes.BonusData("empty_mining_bonus", this.skillName, this.cost));
+                SkillTreeScreen.this.player.setData(this.skill, new ModDataMapTypes.SkillData(skillData.name(), skillData.skill() - this.cost));
+            }
+        }
+
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {}
     }
 }

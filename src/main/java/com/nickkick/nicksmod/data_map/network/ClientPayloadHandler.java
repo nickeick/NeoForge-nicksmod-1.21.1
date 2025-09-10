@@ -17,10 +17,6 @@ public class ClientPayloadHandler {
             Player player = context.player();
             if (player != null && skillSupplier != null) {
                 // Construct SkillData object from int and store
-//                System.out.println(" ~~~~~ ");
-//                System.out.println(data.skill());
-//                System.out.println(" ~~~~~ ");
-
                 ModDataMapTypes.SkillData skillData = new ModDataMapTypes.SkillData(data.name(), data.skill());
                 player.setData(skillSupplier.get(), skillData);
             }

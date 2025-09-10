@@ -85,7 +85,7 @@ public class SkillTreeBlock extends BaseEntityBlock {
                         ModDataMapTypes.SkillData old_skill = serverPlayer.getData(entry.getValue().get());
                         ModDataMapTypes.SkillData new_skill = new ModDataMapTypes.SkillData(old_skill.name(), stack.get(entry.getKey()) != null ? stack.get(entry.getKey()) + old_skill.skill() : 0 + old_skill.skill());
                         serverPlayer.setData(entry.getValue().get(), new_skill);
-                        System.out.println(serverPlayer.getData(entry.getValue().get()));
+                        //System.out.println(serverPlayer.getData(entry.getValue().get()));
                         stack.set(entry.getKey(), 0);
                         PacketDistributor.sendToPlayer(serverPlayer, new_skill);
                     }

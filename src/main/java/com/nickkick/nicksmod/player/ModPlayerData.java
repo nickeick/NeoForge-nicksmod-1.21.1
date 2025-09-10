@@ -62,6 +62,21 @@ public class ModPlayerData {
                     .put("unarmed", ModPlayerData.UNARMED_SKILL)
                     .build();
 
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_MINING_BONUS = ATTACHMENT_TYPES.register(
+            "empty_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_mining_bonus", "mining", 10))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Map<String, Supplier<AttachmentType<ModDataMapTypes.BonusData>>> BONUS_NAMES =
+            (new ImmutableMap.Builder<String, Supplier<AttachmentType<ModDataMapTypes.BonusData>>>())
+                    .put("empty_mining_bonus", ModPlayerData.EMPTY_MINING_BONUS)
+                    .build();
+
+    public static final Supplier<AttachmentType<ModAbilityData.AreaModeData>> AREA_MODE_ENABLED = ATTACHMENT_TYPES.register(
+            "area_mode_enabled", () -> AttachmentType.builder(ModAbilityData.AreaModeData::new).build()
+    );
+
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }
