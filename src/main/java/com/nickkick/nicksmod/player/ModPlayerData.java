@@ -62,19 +62,79 @@ public class ModPlayerData {
                     .put("unarmed", ModPlayerData.UNARMED_SKILL)
                     .build();
 
-    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_MINING_BONUS = ATTACHMENT_TYPES.register(
-            "empty_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_mining_bonus", "mining", 10))
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> AREA_MINING_BONUS = ATTACHMENT_TYPES.register(
+            "area_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("area_mining_bonus", "mining", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> XP_MINING_BONUS = ATTACHMENT_TYPES.register(
+            "xp_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("xp_mining_bonus", "mining", 20, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> FELLER_CHOPPING_BONUS = ATTACHMENT_TYPES.register(
+            "feller_chopping_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("feller_chopping_bonus", "chopping", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> AREA_DIGGING_BONUS = ATTACHMENT_TYPES.register(
+            "area_digging_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("area_digging_bonus", "digging", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_SWORDS_BONUS = ATTACHMENT_TYPES.register(
+            "empty_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_swords_bonus", "swords", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_AXES_BONUS = ATTACHMENT_TYPES.register(
+            "empty_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_axes_bonus", "axes", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> SLOW_UNARMED_BONUS = ATTACHMENT_TYPES.register(
+            "slow_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("slow_unarmed_bonus", "unarmed", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> POISON_UNARMED_BONUS = ATTACHMENT_TYPES.register(
+            "poison_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("poison_unarmed_bonus", "unarmed", 20, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> LIGHTNING_UNARMED_BONUS = ATTACHMENT_TYPES.register(
+            "lightning_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("lightning_unarmed_bonus", "unarmed", 30, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
 
     public static final Map<String, Supplier<AttachmentType<ModDataMapTypes.BonusData>>> BONUS_NAMES =
             (new ImmutableMap.Builder<String, Supplier<AttachmentType<ModDataMapTypes.BonusData>>>())
-                    .put("empty_mining_bonus", ModPlayerData.EMPTY_MINING_BONUS)
+                    .put("area_mining_bonus", ModPlayerData.AREA_MINING_BONUS)
+                    .put("xp_mining_bonus", ModPlayerData.XP_MINING_BONUS)
+                    .put("feller_chopping_bonus", ModPlayerData.FELLER_CHOPPING_BONUS)
+                    .put("area_digging_bonus", ModPlayerData.AREA_DIGGING_BONUS)
+                    .put("empty_swords_bonus", ModPlayerData.EMPTY_SWORDS_BONUS)
+                    .put("empty_axes_bonus", ModPlayerData.EMPTY_AXES_BONUS)
+                    .put("slow_unarmed_bonus", ModPlayerData.SLOW_UNARMED_BONUS)
+                    .put("poison_unarmed_bonus", ModPlayerData.POISON_UNARMED_BONUS)
+                    .put("lightning_unarmed_bonus", ModPlayerData.LIGHTNING_UNARMED_BONUS)
                     .build();
 
     public static final Supplier<AttachmentType<ModAbilityData.AreaModeData>> AREA_MODE_ENABLED = ATTACHMENT_TYPES.register(
             "area_mode_enabled", () -> AttachmentType.builder(ModAbilityData.AreaModeData::new).build()
+    );
+
+    public static final Supplier<AttachmentType<ModAbilityData.FellerModeData>> FELLER_MODE_ENABLED = ATTACHMENT_TYPES.register(
+            "feller_mode_enabled", () -> AttachmentType.builder(ModAbilityData.FellerModeData::new).build()
     );
 
     public static void register(IEventBus eventBus) {

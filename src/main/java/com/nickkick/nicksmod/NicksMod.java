@@ -12,9 +12,13 @@ import com.nickkick.nicksmod.player.ModKeyMappings;
 import com.nickkick.nicksmod.player.ModPlayerData;
 import com.nickkick.nicksmod.screen.ModMenuTypes;
 import com.nickkick.nicksmod.screen.custom.SkillTreeScreen;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.HandlerThread;
 import org.slf4j.Logger;
@@ -34,7 +38,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-import static com.nickkick.nicksmod.player.ModPlayerData.AREA_MODE_ENABLED;
+import java.util.function.Supplier;
+
+import static com.nickkick.nicksmod.player.ModPlayerData.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(NicksMod.MOD_ID)
@@ -104,19 +110,28 @@ public class NicksMod {
                     .playToClient(
                             ModDataMapTypes.SkillData.TYPE,
                             ModDataMapTypes.SkillData.STREAM_CODEC,
-                            ClientPayloadHandler::handleOnNetwork
+                            ClientPayloadHandler::handleSkillOnNetwork
                     )
-                    .playToServer(
+                    .playBidirectional(
                             ModDataMapTypes.BonusData.TYPE,
                             ModDataMapTypes.BonusData.STREAM_CODEC,
                             ServerPayloadHandler::handleOnNetwork
                     )
                     .playToServer(
-                            ModDataMapTypes.ToggleAbilityPayload.TYPE,
-                            ModDataMapTypes.ToggleAbilityPayload.CODEC,
+                            ModDataMapTypes.ToggleAreaAbilityPayload.TYPE,
+                            ModDataMapTypes.ToggleAreaAbilityPayload.CODEC,
                             (toggleAbilityPayload, iPayloadContext) -> {
                                 var player = iPayloadContext.player();
                                 var data = player.getData(AREA_MODE_ENABLED);
+                                data.toggle();
+                            }
+                    )
+                    .playToServer(
+                            ModDataMapTypes.ToggleFellerAbilityPayload.TYPE,
+                            ModDataMapTypes.ToggleFellerAbilityPayload.CODEC,
+                            (toggleAbilityPayload, iPayloadContext) -> {
+                                var player = iPayloadContext.player();
+                                var data = player.getData(FELLER_MODE_ENABLED);
                                 data.toggle();
                             }
                     );

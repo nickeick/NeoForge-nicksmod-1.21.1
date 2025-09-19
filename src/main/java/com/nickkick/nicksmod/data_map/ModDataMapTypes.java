@@ -38,14 +38,18 @@ public class ModDataMapTypes {
 
     public static DataMapType<EntityType<?>, SkillData> SKILL_DATA;
 
-    public record BonusData(String name, String skill, int cost) implements CustomPacketPayload {
+    public record BonusData(String name, String skill, int cost, boolean has) implements CustomPacketPayload {
         public static final CustomPacketPayload.Type<BonusData> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "bonus_data"));
 
         public static final Codec<BonusData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.STRING.fieldOf("name").forGetter(BonusData::name),
                 Codec.STRING.fieldOf("skill").forGetter(BonusData::skill),
-                Codec.INT.fieldOf("cost").forGetter(BonusData::cost)
-        ).apply(instance, BonusData::new));
+                Codec.INT.fieldOf("cost").forGetter(BonusData::cost),
+                Codec.BOOL.fieldOf("has").forGetter(BonusData::has)
+        ).apply(instance, (name, skill, cost, has) -> {
+            System.out.println("Decoding BonusData: " + name + ", " + skill + ", " + cost + ", " + has);
+            return new BonusData(name, skill, cost, has);
+        }));
 
         public static final StreamCodec<ByteBuf, BonusData> STREAM_CODEC =
                 StreamCodec.composite(
@@ -55,20 +59,34 @@ public class ModDataMapTypes {
                         BonusData::skill,
                         ByteBufCodecs.VAR_INT,
                         BonusData::cost,
+                        ByteBufCodecs.BOOL,
+                        BonusData::has,
                         BonusData::new
                 );
 
         @Override
-        public @NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
+        public CustomPacketPayload.@NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
     }
 
-    public record ToggleAbilityPayload() implements CustomPacketPayload {
-        public static final Type<ToggleAbilityPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "toggle_area_mode_ability"));
+    public static DataMapType<EntityType<?>, BonusData> BONUS_DATA;
 
-        public static final StreamCodec<FriendlyByteBuf, ToggleAbilityPayload> CODEC =
-                StreamCodec.unit(new ToggleAbilityPayload());
+    public record ToggleAreaAbilityPayload() implements CustomPacketPayload {
+        public static final Type<ToggleAreaAbilityPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "toggle_area_mode_ability"));
+
+        public static final StreamCodec<FriendlyByteBuf, ToggleAreaAbilityPayload> CODEC =
+                StreamCodec.unit(new ToggleAreaAbilityPayload());
 
         @Override
-        public Type<ToggleAbilityPayload> type() { return TYPE; }
+        public Type<ToggleAreaAbilityPayload> type() { return TYPE; }
+    }
+
+    public record ToggleFellerAbilityPayload() implements CustomPacketPayload {
+        public static final Type<ToggleFellerAbilityPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "toggle_feller_mode_ability"));
+
+        public static final StreamCodec<FriendlyByteBuf, ToggleFellerAbilityPayload> CODEC =
+                StreamCodec.unit(new ToggleFellerAbilityPayload());
+
+        @Override
+        public Type<ToggleFellerAbilityPayload> type() { return TYPE; }
     }
 }

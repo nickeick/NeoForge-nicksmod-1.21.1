@@ -20,7 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
@@ -73,18 +73,31 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
             }).pos(this.leftPos - 55, this.topPos + iter*25).size(50, 20).build());
             iter = iter + 1;
         }
+        LinkedHashMap<List<String>, Integer> page = new LinkedHashMap<>();
         if (currentTab == 0) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Mining Bonus", "mining", 10));
+            page.put(List.of("3x3 Mining", "area_mining_bonus"), 10);
+            page.put(List.of("Double Mining XP", "xp_mining_bonus"), 20);
         } else if (currentTab == 1) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Chopping Bonus", "chopping", 10));
+            page.put(List.of("Tree Feller", "feller_chopping_bonus"), 10);
         } else if (currentTab == 2) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Digging Bonus", "digging", 10));
+            page.put(List.of("3x3 Digging", "area_digging_bonus"), 10);
         } else if (currentTab == 3) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Swords Bonus", "swords", 10));
+            page.put(List.of("Swords Bonus", "empty_swords_bonus"), 10);
         } else if (currentTab == 4) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Axes Bonus", "axes", 10));
+            page.put(List.of("Axes Bonus", "empty_axes_bonus"), 10);
         } else if (currentTab == 5) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + 40, "Unarmed Bonus", "unarmed", 10));
+            page.put(List.of("Slowing Strike", "slow_unarmed_bonus"), 10);
+            page.put(List.of("Poison Punch", "poison_unarmed_bonus"), 20);
+            page.put(List.of("The Hand of God", "lightning_unarmed_bonus"), 30);
+        }
+        renderPage(page);
+    }
+
+    private void renderPage(LinkedHashMap<List<String>, Integer> pages) {
+        int length = 40;
+        for (List<String> page: pages.keySet()) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + length, page.getFirst(), page.get(1), pages.get(page)));
+            length = length + 30;
         }
     }
 
@@ -133,22 +146,40 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     class SkillTreeBonusButton extends AbstractButton {
         private final int cost;
         private final AttachmentType<ModDataMapTypes.SkillData> skill;
+        private final AttachmentType<ModDataMapTypes.BonusData> bonus;
         private final String skillName;
+        private final String bonusName;
 
-        public SkillTreeBonusButton(int x, int y, String buttonName, String skillName, int cost) {
+        public SkillTreeBonusButton(int x, int y, String buttonName, String bonusName, int cost) {
             super(x, y, 100, 20, Component.literal(buttonName + ": " + cost));
-            this.skillName = skillName;
-            this.skill = ModPlayerData.SKILL_NAMES.get(skillName).get();
-            this.cost = cost;
+            this.bonus = ModPlayerData.BONUS_NAMES.get(bonusName).get();
+            this.skillName = SkillTreeScreen.this.player.getData(this.bonus).skill();
+            this.skill = ModPlayerData.SKILL_NAMES.get(this.skillName).get();
+            this.bonusName = bonusName;
+            this.cost = SkillTreeScreen.this.player.getData(this.bonus).cost();
+        }
+
+        @Override
+        protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+            if (SkillTreeScreen.this.player.hasData(bonus)) {
+                this.active = (!SkillTreeScreen.this.player.getData(bonus).has() && SkillTreeScreen.this.player.getData(this.skill).skill() >= this.cost);
+                if (SkillTreeScreen.this.player.getData(this.skill).skill() < this.cost) {
+                    this.setFGColor(16711680);  // Red 255
+                }
+                if (SkillTreeScreen.this.player.hasData(bonus) && SkillTreeScreen.this.player.getData(bonus).has()) {
+                    this.setFGColor(65280);  // Green 255
+                }
+            }
+            super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
         }
 
         @Override
         public void onPress() {
             ModDataMapTypes.SkillData skillData = SkillTreeScreen.this.player.getData(this.skill);
-            if (skillData.skill() >= this.cost) {
-                //SkillTreeScreen.this.player.closeContainer();
-                PacketDistributor.sendToServer(new ModDataMapTypes.BonusData("empty_mining_bonus", this.skillName, this.cost));
-                SkillTreeScreen.this.player.setData(this.skill, new ModDataMapTypes.SkillData(skillData.name(), skillData.skill() - this.cost));
+            // If the player has the skill cost and doesn't have the bonus already
+            if (skillData.skill() >= this.cost && !SkillTreeScreen.this.player.getData(this.bonus).has()) {
+                PacketDistributor.sendToServer(new ModDataMapTypes.BonusData(this.bonusName, this.skillName, this.cost, true));
+                this.clearFGColor();
             }
         }
 

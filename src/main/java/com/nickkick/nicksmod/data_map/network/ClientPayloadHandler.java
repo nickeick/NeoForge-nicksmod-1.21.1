@@ -10,7 +10,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.function.Supplier;
 
 public class ClientPayloadHandler {
-    public static void handleOnNetwork(ModDataMapTypes.SkillData data, IPayloadContext context) {
+    public static void handleSkillOnNetwork(ModDataMapTypes.SkillData data, IPayloadContext context) {
         Supplier<AttachmentType<ModDataMapTypes.SkillData>> skillSupplier = ModPlayerData.SKILL_NAMES.get(data.name());
 
         context.enqueueWork(() -> {

@@ -13,4 +13,12 @@ public class ModKeyMappings {
             GLFW.GLFW_KEY_G,
             "key.categories.misc"
     );
+
+    public static final KeyMapping FELLER_MODE_MAPPING = new KeyMapping(
+            "key.nicksmod.fellermode",
+            KeyConflictContext.IN_GAME,
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_H,
+            "key.categories.misc"
+    );
 }

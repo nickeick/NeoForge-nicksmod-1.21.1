@@ -13,60 +13,127 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = NicksMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class ModEvents {
+
+    @SubscribeEvent
+    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        // This is a Synchronization for server and client data
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            // Send SkillData
+            for (Supplier<AttachmentType<ModDataMapTypes.SkillData>> skill: ModPlayerData.SKILL_NAMES.values()) {
+                var skillData = serverPlayer.getData(skill.get());
+                if (skillData != null) {
+                    PacketDistributor.sendToPlayer(serverPlayer, skillData);
+                }
+            }
+
+            // Send BonusData
+            for(Supplier<AttachmentType<ModDataMapTypes.BonusData>> bonus: ModPlayerData.BONUS_NAMES.values()) {
+                var bonusData = serverPlayer.getData(bonus.get());
+                if (bonusData != null) {
+                    PacketDistributor.sendToPlayer(serverPlayer, bonusData);
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public static void onMine(BlockEvent.BreakEvent event) {
         ItemStack mainHandItem = event.getPlayer().getMainHandItem();
         if(event.getState().is(BlockTags.MINEABLE_WITH_PICKAXE) && !event.isCanceled() && mainHandItem.is(ItemTags.PICKAXES)) {
             updateSkillStaff(event.getPlayer(), ModDataComponents.MINED_BLOCKS);
-            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.EMPTY_MINING_BONUS.get());
+            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.AREA_MINING_BONUS.get());
             ModAbilityData.AreaModeData abilityData = event.getPlayer().getData(ModPlayerData.AREA_MODE_ENABLED.get());
-            if(Objects.equals(bonusData.name(), "empty_mining_bonus") && abilityData.isEnabled()) {
+            if(bonusData.has() && abilityData.isEnabled()) {
                 ModEventHelpers.onAreaEffectEvent(event, mainHandItem.getItem());
+            }
+            Level level = (Level) event.getLevel();
+            BlockState blockState = level.getBlockState(event.getPos());
+            Block block = blockState.getBlock();
+            if (block instanceof DropExperienceBlock experienceBlock) {
+                //System.out.println("EXP DROP");
+                int xp = experienceBlock.getExpDrop(blockState, level, event.getPos(), level.getBlockEntity(event.getPos()), event.getPlayer(), mainHandItem);
+                //System.out.println(xp);
+                event.getPlayer().giveExperiencePoints(xp);
             }
         }
         if(event.getState().is(BlockTags.MINEABLE_WITH_AXE) && !event.isCanceled() && mainHandItem.is(ItemTags.AXES)) {
             updateSkillStaff(event.getPlayer(), ModDataComponents.CHOPPED_BLOCKS);
+            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.FELLER_CHOPPING_BONUS.get());
+            ModAbilityData.FellerModeData abilityData = event.getPlayer().getData(ModPlayerData.FELLER_MODE_ENABLED.get());
+            if (bonusData.has() && event.getLevel().getBlockState(event.getPos()).is(BlockTags.LOGS) && abilityData.isEnabled()) {
+                ModEventHelpers.onTreeFellEffectEvent(event);
+                //ModEventHelpers.resetBlock();
+            }
         }
         if(event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL) && !event.isCanceled() && mainHandItem.is(ItemTags.SHOVELS)) {
             updateSkillStaff(event.getPlayer(), ModDataComponents.DUG_BLOCKS);
+            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.AREA_DIGGING_BONUS.get());
+            ModAbilityData.AreaModeData abilityData = event.getPlayer().getData(ModPlayerData.AREA_MODE_ENABLED.get());
+            if(bonusData.has() && abilityData.isEnabled()) {
+                ModEventHelpers.onAreaEffectEvent(event, mainHandItem.getItem());
+            }
         }
     }
 
     @SubscribeEvent
     public static void onDamage(LivingDamageEvent.Pre event) {
         if(event.getSource().getDirectEntity() instanceof Player player) {
-            if(player.getMainHandItem().is(ItemTags.SWORDS)) {
+            ItemStack mainHandItem = player.getMainHandItem();
+            if(mainHandItem.is(ItemTags.SWORDS)) {
                 updateSkillStaff(player, ModDataComponents.SWORD_ATTACKS);
             }
-            if(player.getMainHandItem().is(ItemTags.AXES)) {
+            if(mainHandItem.is(ItemTags.AXES)) {
                 updateSkillStaff(player, ModDataComponents.AXE_ATTACKS);
             }
-            if (player.getMainHandItem().isEmpty()) {
+            if (mainHandItem.isEmpty()) {
                 updateSkillStaff(player, ModDataComponents.UNARMED_ATTACKS);
+                ModDataMapTypes.BonusData slowBonus = player.getData(ModPlayerData.SLOW_UNARMED_BONUS.get());
+                if(slowBonus.has()) {
+                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 3));
+                }
+                ModDataMapTypes.BonusData poisonBonus = player.getData(ModPlayerData.POISON_UNARMED_BONUS.get());
+                if (poisonBonus.has()) {
+                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.POISON, 600));
+                }
+                ModDataMapTypes.BonusData lightningBonus = player.getData(ModPlayerData.LIGHTNING_UNARMED_BONUS.get());
+                if (lightningBonus.has()) {
+                    EntityType.LIGHTNING_BOLT.spawn((ServerLevel) event.getEntity().level(), event.getEntity().blockPosition(), MobSpawnType.TRIGGERED);
+                }
             }
         }
     }
@@ -92,18 +159,35 @@ class ModClientEvents {
         while (ModKeyMappings.AREA_MODE_MAPPING.consumeClick()) {
             Player player = Minecraft.getInstance().player;
             if (player != null) {
-                ModDataMapTypes.BonusData bonusData = player.getData(ModPlayerData.EMPTY_MINING_BONUS.get());
-
-                if(Objects.equals(bonusData.name(), "empty_mining_bonus")) {
+                if(player.hasData(ModPlayerData.AREA_MINING_BONUS.get()) && player.getData(ModPlayerData.AREA_MINING_BONUS.get()).has()) {
                     ModAbilityData.AreaModeData abilityData = player.getData(ModPlayerData.AREA_MODE_ENABLED.get());
                     if(abilityData.isEnabled()) {
-                        player.sendSystemMessage(Component.literal("3x3 Mining Disabled"));
+                        player.sendSystemMessage(Component.literal("3x3 Area Disabled"));
                         abilityData.setEnabled(false);
                     } else {
-                        player.sendSystemMessage(Component.literal("3x3 Mining Enabled"));
+                        player.sendSystemMessage(Component.literal("3x3 Area Enabled"));
                         abilityData.setEnabled(true);
                     }
-                    PacketDistributor.sendToServer(new ModDataMapTypes.ToggleAbilityPayload());
+                    PacketDistributor.sendToServer(new ModDataMapTypes.ToggleAreaAbilityPayload());
+                    //System.out.println("test");
+                } else {
+                    player.sendSystemMessage(Component.literal("You do not have this upgrade"));
+                }
+            }
+        }
+        while (ModKeyMappings.FELLER_MODE_MAPPING.consumeClick()) {
+            Player player = Minecraft.getInstance().player;
+            if (player != null) {
+                if(player.hasData(ModPlayerData.FELLER_CHOPPING_BONUS.get()) && player.getData(ModPlayerData.FELLER_CHOPPING_BONUS.get()).has()) {
+                    ModAbilityData.FellerModeData abilityData = player.getData(ModPlayerData.FELLER_MODE_ENABLED.get());
+                    if(abilityData.isEnabled()) {
+                        player.sendSystemMessage(Component.literal("Tree Feller Disabled"));
+                        abilityData.setEnabled(false);
+                    } else {
+                        player.sendSystemMessage(Component.literal("Tree Feller Enabled"));
+                        abilityData.setEnabled(true);
+                    }
+                    PacketDistributor.sendToServer(new ModDataMapTypes.ToggleFellerAbilityPayload());
                     //System.out.println("test");
                 } else {
                     player.sendSystemMessage(Component.literal("You do not have this upgrade"));
@@ -116,6 +200,8 @@ class ModClientEvents {
 // Thank you Kaupenjoe
 class ModEventHelpers {
     private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
+    private static final Set<BlockPos> FELLED_BLOCKS = new HashSet<>();
+    private static Block TO_BE_FELLED_BLOCK = null;
 
     public static List<BlockPos> getBlocksToBeDestroyed(int range, BlockPos initalBlockPos, ServerPlayer player) {
         List<BlockPos> positions = new ArrayList<>();
@@ -175,6 +261,22 @@ class ModEventHelpers {
                 serverPlayer.gameMode.destroyBlock(pos);
                 HARVESTED_BLOCKS.remove(pos);
             }
+        }
+    }
+
+    public static void onTreeFellEffectEvent(BlockEvent.BreakEvent event) {
+        Player player = event.getPlayer();
+        Level level = (Level) event.getLevel();
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            BlockPos pos = event.getPos();
+            pos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+            if (level.getBlockState(pos).is(BlockTags.LOGS)) {
+                serverPlayer.gameMode.destroyBlock(pos);
+                //FELLED_BLOCKS.add(pos);
+            }
+
+            //FELLED_BLOCKS.clear();
         }
     }
 }
