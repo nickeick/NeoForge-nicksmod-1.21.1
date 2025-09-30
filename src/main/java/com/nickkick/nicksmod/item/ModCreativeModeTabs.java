@@ -18,31 +18,17 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, NicksMod.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> BISMUTH_ITEMS_TAB = CREATIVE_MODE_TAB.register("bismuth_items_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BISMUTH.get()))
-                    .title(Component.translatable("creativetab.nicksmod.bismuth_items"))
+    public static final Supplier<CreativeModeTab> SKILL_TREE_ITEMS_TAB = CREATIVE_MODE_TAB.register("skill_tree_items_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.SKILL_STAFF.get()))
+                    .title(Component.translatable("creativetab.nicksmod.skill_tree_items"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModItems.BISMUTH);
-                        output.accept(ModItems.RAW_BISMUTH);
-                        output.accept(ModItems.CHISEL);
                         output.accept(ModItems.ZIRCON);
+                        output.accept(ModBlocks.ZIRCON_ORE);
+                        output.accept(ModBlocks.SKILL_TREE_BLOCK);
                         output.accept(ModItems.SKILL_STAFF);
                     })
                     .build());
 
-    public static final Supplier<CreativeModeTab> BISMUTH_BLOCKS_TAB = CREATIVE_MODE_TAB.register("bismuth_blocks_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.BISMUTH_BLOCK))
-                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "bismuth_items_tab"))
-                    .title(Component.translatable("creativetab.nicksmod.bismuth_blocks"))
-                    .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModBlocks.BISMUTH_BLOCK);
-                        output.accept(ModBlocks.BISMUTH_ORE);
-                        output.accept(ModBlocks.BISMUTH_DEEPSLATE_ORE);
-                        output.accept(ModBlocks.MAGIC_BLOCK);
-                        output.accept(ModBlocks.ZIRCON_ORE);
-                        output.accept(ModBlocks.SKILL_TREE_BLOCK);
-                    })
-                    .build());
 
     public static final Supplier<CreativeModeTab> HOT_DOG_ITEMS = CREATIVE_MODE_TAB.register("hot_dogs_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.HOT_DOG.get()))

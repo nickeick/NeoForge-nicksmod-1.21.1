@@ -19,11 +19,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.BISMUTH_BLOCK.get())
-                .add(ModBlocks.BISMUTH_ORE.get())
-                .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
                 .add(ModBlocks.ZIRCON_ORE.get())
-                .add(ModBlocks.MAGIC_BLOCK.get())
                 .add(ModBlocks.WHITE_BRICKS.get())
                 .add(ModBlocks.LIGHT_GRAY_BRICKS.get())
                 .add(ModBlocks.GRAY_BRICKS.get())
@@ -93,7 +89,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.PINK_BRICKS_WALL.get());
 
         tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
                 .add(ModBlocks.ZIRCON_ORE.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE)

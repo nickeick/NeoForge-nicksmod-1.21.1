@@ -7,20 +7,22 @@ import com.nickkick.nicksmod.player.ModPlayerData;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
@@ -75,20 +77,24 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         }
         LinkedHashMap<List<String>, Integer> page = new LinkedHashMap<>();
         if (currentTab == 0) {
-            page.put(List.of("3x3 Mining", "area_mining_bonus"), 10);
-            page.put(List.of("Double Mining XP", "xp_mining_bonus"), 20);
+            page.put(List.of("area_mining_bonus", "None"), 10);
+            page.put(List.of("xp_mining_bonus", "area_mining_bonus"), 20);
         } else if (currentTab == 1) {
-            page.put(List.of("Tree Feller", "feller_chopping_bonus"), 10);
+            page.put(List.of("feller_chopping_bonus", "None"), 10);
         } else if (currentTab == 2) {
-            page.put(List.of("3x3 Digging", "area_digging_bonus"), 10);
+            page.put(List.of("area_digging_bonus", "None"), 10);
         } else if (currentTab == 3) {
-            page.put(List.of("Swords Bonus", "empty_swords_bonus"), 10);
+            page.put(List.of("weakness_swords_bonus", "None"), 10);
+            page.put(List.of("wither_swords_bonus", "weakness_swords_bonus"), 20);
+            page.put(List.of("blindness_swords_bonus", "wither_swords_bonus"), 30);
         } else if (currentTab == 4) {
-            page.put(List.of("Axes Bonus", "empty_axes_bonus"), 10);
+            page.put(List.of("jump_axes_bonus", "None"), 10);
+            page.put(List.of("regeneration_axes_bonus", "jump_axes_bonus"), 20);
+            page.put(List.of("invisibility_axes_bonus", "regeneration_axes_bonus"), 30);
         } else if (currentTab == 5) {
-            page.put(List.of("Slowing Strike", "slow_unarmed_bonus"), 10);
-            page.put(List.of("Poison Punch", "poison_unarmed_bonus"), 20);
-            page.put(List.of("The Hand of God", "lightning_unarmed_bonus"), 30);
+            page.put(List.of("slow_unarmed_bonus", "None"), 10);
+            page.put(List.of("poison_unarmed_bonus", "slow_unarmed_bonus"), 20);
+            page.put(List.of("lightning_unarmed_bonus", "poison_unarmed_bonus"), 30);
         }
         renderPage(page);
     }
@@ -96,7 +102,7 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     private void renderPage(LinkedHashMap<List<String>, Integer> pages) {
         int length = 40;
         for (List<String> page: pages.keySet()) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + length, page.getFirst(), page.get(1), pages.get(page)));
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + length, page.get(0), pages.get(page), page.get(1)));
             length = length + 30;
         }
     }
@@ -149,21 +155,35 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         private final AttachmentType<ModDataMapTypes.BonusData> bonus;
         private final String skillName;
         private final String bonusName;
+        private final Boolean required;
+        private final String requiredString;
 
-        public SkillTreeBonusButton(int x, int y, String buttonName, String bonusName, int cost) {
-            super(x, y, 100, 20, Component.literal(buttonName + ": " + cost));
+        public SkillTreeBonusButton(int x, int y, String bonusName, int cost, String required) {
+            super(x, y, 100, 20, Component.literal(Component.translatable("tooltip.nicksmod.bonus." + bonusName).getString() + ": " + cost));
             this.bonus = ModPlayerData.BONUS_NAMES.get(bonusName).get();
             this.skillName = SkillTreeScreen.this.player.getData(this.bonus).skill();
             this.skill = ModPlayerData.SKILL_NAMES.get(this.skillName).get();
             this.bonusName = bonusName;
             this.cost = SkillTreeScreen.this.player.getData(this.bonus).cost();
+            this.requiredString = required;
+            this.required = Objects.equals(required, "None") || SkillTreeScreen.this.player.getData(ModPlayerData.BONUS_NAMES.get(required).get()).has();
+            this.setTooltip(null);
+        }
+
+        @Override
+        public void setTooltip(@Nullable Tooltip tooltip) {
+            if (Objects.equals(requiredString, "None")) {
+                super.setTooltip(tooltip);
+            } else {
+                super.setTooltip(Tooltip.create(Component.literal("Required: " + Component.translatable("tooltip.nicksmod.bonus." + requiredString).getString())));
+            }
         }
 
         @Override
         protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             if (SkillTreeScreen.this.player.hasData(bonus)) {
                 this.active = (!SkillTreeScreen.this.player.getData(bonus).has() && SkillTreeScreen.this.player.getData(this.skill).skill() >= this.cost);
-                if (SkillTreeScreen.this.player.getData(this.skill).skill() < this.cost) {
+                if (SkillTreeScreen.this.player.getData(this.skill).skill() < this.cost || !this.required) {
                     this.setFGColor(16711680);  // Red 255
                 }
                 if (SkillTreeScreen.this.player.hasData(bonus) && SkillTreeScreen.this.player.getData(bonus).has()) {
@@ -177,7 +197,7 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         public void onPress() {
             ModDataMapTypes.SkillData skillData = SkillTreeScreen.this.player.getData(this.skill);
             // If the player has the skill cost and doesn't have the bonus already
-            if (skillData.skill() >= this.cost && !SkillTreeScreen.this.player.getData(this.bonus).has()) {
+            if (skillData.skill() >= this.cost && !SkillTreeScreen.this.player.getData(this.bonus).has() && this.required) {
                 PacketDistributor.sendToServer(new ModDataMapTypes.BonusData(this.bonusName, this.skillName, this.cost, true));
                 this.clearFGColor();
             }

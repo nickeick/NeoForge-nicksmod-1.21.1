@@ -19,7 +19,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -85,9 +87,7 @@ public class ModEvents {
             BlockState blockState = level.getBlockState(event.getPos());
             Block block = blockState.getBlock();
             if (block instanceof DropExperienceBlock experienceBlock) {
-                //System.out.println("EXP DROP");
                 int xp = experienceBlock.getExpDrop(blockState, level, event.getPos(), level.getBlockEntity(event.getPos()), event.getPlayer(), mainHandItem);
-                //System.out.println(xp);
                 event.getPlayer().giveExperiencePoints(xp);
             }
         }
@@ -116,9 +116,33 @@ public class ModEvents {
             ItemStack mainHandItem = player.getMainHandItem();
             if(mainHandItem.is(ItemTags.SWORDS)) {
                 updateSkillStaff(player, ModDataComponents.SWORD_ATTACKS);
+                ModDataMapTypes.BonusData weaknessBonus = player.getData(ModPlayerData.WEAKNESS_SWORDS_BONUS.get());
+                if (weaknessBonus.has()) {
+                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 600));
+                }
+                ModDataMapTypes.BonusData witherBonus = player.getData(ModPlayerData.WITHER_SWORDS_BONUS.get());
+                if (witherBonus.has()) {
+                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.WITHER, 600));
+                }
+                ModDataMapTypes.BonusData blindnessBonus = player.getData(ModPlayerData.BLINDNESS_SWORDS_BONUS.get());
+                if (blindnessBonus.has()) {
+                    event.getEntity().addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 600));
+                }
             }
             if(mainHandItem.is(ItemTags.AXES)) {
                 updateSkillStaff(player, ModDataComponents.AXE_ATTACKS);
+                ModDataMapTypes.BonusData jumpBonus = player.getData(ModPlayerData.JUMP_AXES_BONUS.get());
+                if (jumpBonus.has()) {
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP, 600));
+                }
+                ModDataMapTypes.BonusData regenerationBonus = player.getData(ModPlayerData.REGENERATION_AXES_BONUS.get());
+                if (regenerationBonus.has()) {
+                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 600));
+                }
+                ModDataMapTypes.BonusData invisibilityBonus = player.getData(ModPlayerData.INVISIBILITY_AXES_BONUS.get());
+                if (invisibilityBonus.has()) {
+                    player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 600));
+                }
             }
             if (mainHandItem.isEmpty()) {
                 updateSkillStaff(player, ModDataComponents.UNARMED_ATTACKS);

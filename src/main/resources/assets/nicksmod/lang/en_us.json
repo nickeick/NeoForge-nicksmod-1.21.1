@@ -159,5 +159,19 @@
   "creativetab.nicksmod.colorful_bricks": "Colorful Bricks",
 
   "key.nicksmod.areamode": "Change Your Tool To 3x3 Area Mode",
-  "key.nicksmod.fellermode": "Change Your Axe To Tree Feller Mode"
+  "key.nicksmod.fellermode": "Change Your Axe To Tree Feller Mode",
+
+  "tooltip.nicksmod.bonus.area_mining_bonus": "3x3 Mining",
+  "tooltip.nicksmod.bonus.xp_mining_bonus": "Double Mining XP",
+  "tooltip.nicksmod.bonus.feller_chopping_bonus": "Tree Feller",
+  "tooltip.nicksmod.bonus.area_digging_bonus": "3x3 Digging",
+  "tooltip.nicksmod.bonus.jump_axes_bonus": "Jump Boost",
+  "tooltip.nicksmod.bonus.regeneration_axes_bonus": "Regeneration",
+  "tooltip.nicksmod.bonus.invisibility_axes_bonus": "Invisibility",
+  "tooltip.nicksmod.bonus.slow_unarmed_bonus": "Slowing Strike",
+  "tooltip.nicksmod.bonus.poison_unarmed_bonus": "Poison Punch",
+  "tooltip.nicksmod.bonus.lightning_unarmed_bonus": "The Hand of God",
+  "tooltip.nicksmod.bonus.weakness_swords_bonus": "Weakness",
+  "tooltip.nicksmod.bonus.wither_swords_bonus": "Wither",
+  "tooltip.nicksmod.bonus.blindness_swords_bonus": "Blindness"
 }

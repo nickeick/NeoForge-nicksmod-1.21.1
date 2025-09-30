@@ -22,27 +22,12 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(NicksMod.MOD_ID);
 
-    public static final DeferredBlock<Block> BISMUTH_BLOCK = registerBlock("bismuth_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.AMETHYST)));
-
-    public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
-            () -> new DropExperienceBlock(UniformInt.of(2, 4),
-                    BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
-
     public static final DeferredBlock<Block> ZIRCON_ORE = registerBlock("zircon_ore",
             () -> new DropExperienceBlock(UniformInt.of(2, 4),
                     BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
     public static final DeferredBlock<Block> SKILL_TREE_BLOCK = registerBlock("skill_tree_block",
             () -> new SkillTreeBlock(BlockBehaviour.Properties.of().strength(3f).requiresCorrectToolForDrops().sound(SoundType.WOOD)));
-
-    public static final DeferredBlock<Block> BISMUTH_DEEPSLATE_ORE = registerBlock("bismuth_deepslate_ore",
-            () -> new DropExperienceBlock(UniformInt.of(3, 4),
-                    BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)));
-
-    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
-            () -> new MagicBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> HOT_DOG_BLOCK = registerBlock("hot_dog_block",
             () -> new Block(BlockBehaviour.Properties.of()

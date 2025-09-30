@@ -1,5 +1,6 @@
 package com.nickkick.nicksmod;
 
+import com.mojang.logging.LogUtils;
 import com.nickkick.nicksmod.block.ModBlocks;
 import com.nickkick.nicksmod.block.entity.ModBlockEntities;
 import com.nickkick.nicksmod.component.ModDataComponents;
@@ -12,19 +13,7 @@ import com.nickkick.nicksmod.player.ModKeyMappings;
 import com.nickkick.nicksmod.player.ModPlayerData;
 import com.nickkick.nicksmod.screen.ModMenuTypes;
 import com.nickkick.nicksmod.screen.custom.SkillTreeScreen;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.HandlerThread;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,13 +23,17 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.HandlerThread;
+import org.slf4j.Logger;
 
-import java.util.function.Supplier;
-
-import static com.nickkick.nicksmod.player.ModPlayerData.*;
+import static com.nickkick.nicksmod.player.ModPlayerData.AREA_MODE_ENABLED;
+import static com.nickkick.nicksmod.player.ModPlayerData.FELLER_MODE_ENABLED;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(NicksMod.MOD_ID)
@@ -85,13 +78,12 @@ public class NicksMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.BISMUTH);
-            event.accept(ModItems.RAW_BISMUTH);
+            event.accept(ModItems.ZIRCON);
         }
 
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.BISMUTH_BLOCK);
-            event.accept(ModBlocks.BISMUTH_ORE);
+            event.accept(ModBlocks.PIZZA_BLOCK);
+            event.accept(ModBlocks.HOT_DOG_BLOCK);
         }
     }
 
@@ -155,6 +147,7 @@ public class NicksMod {
         @SubscribeEvent
         public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
             event.register(ModKeyMappings.AREA_MODE_MAPPING);
+            event.register(ModKeyMappings.FELLER_MODE_MAPPING);
         }
     }
 }

@@ -40,8 +40,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.BISMUTH.get());
-        basicItem(ModItems.RAW_BISMUTH.get());
         basicItem(ModItems.ZIRCON.get());
         basicItem(ModItems.SKILL_STAFF.get());
 
@@ -49,8 +47,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.HOT_DOG_WITH_KETCHUP.get());
         basicItem(ModItems.HOT_DOG_WITH_MUSTARD.get());
         basicItem(ModItems.HOT_DOG_WITH_KETCHUP_AND_MUSTARD.get());
-
-        basicItem(ModItems.CHISEL.get());
 
         buttonItem(ModBlocks.HOT_DOG_BUTTON, ModBlocks.HOT_DOG_BLOCK);
         fenceItem(ModBlocks.HOT_DOG_FENCE, ModBlocks.HOT_DOG_BLOCK);

@@ -21,20 +21,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        List<ItemLike> BISMUTH_SMELTABLES = List.of(ModItems.RAW_BISMUTH,
-                ModBlocks.BISMUTH_ORE, ModBlocks.BISMUTH_DEEPSLATE_ORE);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BISMUTH_BLOCK.get())
-                .pattern("BBB")
-                .pattern("BBB")
-                .pattern("BBB")
-                .define('B', ModItems.BISMUTH.get())
-                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 9)
-                .requires(ModBlocks.BISMUTH_BLOCK)
-                .unlockedBy("has_bismuth_block", has(ModBlocks.BISMUTH_BLOCK)).save(recipeOutput);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.SKILL_TREE_BLOCK.get())
                 .pattern(" Z ")
                 .pattern("ZWZ")
@@ -418,14 +404,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pink_dye", has(Items.PINK_DYE))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 18)
-                .requires(ModBlocks.BISMUTH_BLOCK)
-                .unlockedBy("has_bismuth_block", has(ModBlocks.MAGIC_BLOCK))
-                .save(recipeOutput, "nicksmod:bismuth_from_magic_block");
-
-
-        oreSmelting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
-        oreBlasting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
 
         oreSmelting(recipeOutput, List.of(ModItems.WHITE_CLAY), RecipeCategory.MISC, ModItems.WHITE_BRICK.get(), 0.3f, 200, "white_clay");
         oreBlasting(recipeOutput, List.of(ModItems.WHITE_CLAY), RecipeCategory.MISC, ModItems.WHITE_BRICK.get(), 0.3f, 100, "white_clay");

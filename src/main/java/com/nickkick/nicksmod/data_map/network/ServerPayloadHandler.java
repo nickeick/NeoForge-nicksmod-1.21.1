@@ -20,7 +20,6 @@ public class ServerPayloadHandler {
             if (context.flow().isServerbound()) {
                 Player player = context.player();
                 if (player != null && bonusSupplier != null) {
-                    System.out.println("server supp:" + bonusSupplier.get());
                     player.setData(bonusSupplier.get(), bonusData);
                     ModDataMapTypes.SkillData skillData = player.getData(ModPlayerData.SKILL_NAMES.get(data.skill()));
                     ModDataMapTypes.SkillData newData = new ModDataMapTypes.SkillData(skillData.name(), skillData.skill() - data.cost());
@@ -32,8 +31,6 @@ public class ServerPayloadHandler {
             } else {
                 Player player = context.player();
                 if (player != null && bonusSupplier != null) {
-                    System.out.println("supp: " + bonusSupplier.get());
-                    System.out.println("[CLIENT] BonusData: " + bonusData);
                     player.setData(bonusSupplier.get(), bonusData);
                 }
             }

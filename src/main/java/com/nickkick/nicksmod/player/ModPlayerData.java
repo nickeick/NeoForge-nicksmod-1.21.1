@@ -67,7 +67,6 @@ public class ModPlayerData {
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
-
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> XP_MINING_BONUS = ATTACHMENT_TYPES.register(
             "xp_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("xp_mining_bonus", "mining", 20, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
@@ -86,14 +85,34 @@ public class ModPlayerData {
                     .build()
     );
 
-    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_SWORDS_BONUS = ATTACHMENT_TYPES.register(
-            "empty_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_swords_bonus", "swords", 10, false))
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> WEAKNESS_SWORDS_BONUS = ATTACHMENT_TYPES.register(
+            "weakness_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("weakness_swords_bonus", "swords", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> WITHER_SWORDS_BONUS = ATTACHMENT_TYPES.register(
+            "wither_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("wither_swords_bonus", "swords", 20, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> BLINDNESS_SWORDS_BONUS = ATTACHMENT_TYPES.register(
+            "blindness_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("blindness_swords_bonus", "swords", 30, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
 
-    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> EMPTY_AXES_BONUS = ATTACHMENT_TYPES.register(
-            "empty_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("empty_axes_bonus", "axes", 10, false))
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> JUMP_AXES_BONUS = ATTACHMENT_TYPES.register(
+            "jump_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("jump_axes_bonus", "axes", 10, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> REGENERATION_AXES_BONUS = ATTACHMENT_TYPES.register(
+            "regeneration_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("regeneration_axes_bonus", "axes", 20, false))
+                    .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .build()
+    );
+    public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> INVISIBILITY_AXES_BONUS = ATTACHMENT_TYPES.register(
+            "invisibility_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("invisibility_axes_bonus", "axes", 30, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
@@ -103,13 +122,11 @@ public class ModPlayerData {
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
-
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> POISON_UNARMED_BONUS = ATTACHMENT_TYPES.register(
             "poison_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("poison_unarmed_bonus", "unarmed", 20, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
                     .build()
     );
-
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> LIGHTNING_UNARMED_BONUS = ATTACHMENT_TYPES.register(
             "lightning_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("lightning_unarmed_bonus", "unarmed", 30, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
@@ -122,8 +139,12 @@ public class ModPlayerData {
                     .put("xp_mining_bonus", ModPlayerData.XP_MINING_BONUS)
                     .put("feller_chopping_bonus", ModPlayerData.FELLER_CHOPPING_BONUS)
                     .put("area_digging_bonus", ModPlayerData.AREA_DIGGING_BONUS)
-                    .put("empty_swords_bonus", ModPlayerData.EMPTY_SWORDS_BONUS)
-                    .put("empty_axes_bonus", ModPlayerData.EMPTY_AXES_BONUS)
+                    .put("weakness_swords_bonus", ModPlayerData.WEAKNESS_SWORDS_BONUS)
+                    .put("wither_swords_bonus", ModPlayerData.WITHER_SWORDS_BONUS)
+                    .put("blindness_swords_bonus", ModPlayerData.BLINDNESS_SWORDS_BONUS)
+                    .put("jump_axes_bonus", ModPlayerData.JUMP_AXES_BONUS)
+                    .put("regeneration_axes_bonus", ModPlayerData.REGENERATION_AXES_BONUS)
+                    .put("invisibility_axes_bonus", ModPlayerData.INVISIBILITY_AXES_BONUS)
                     .put("slow_unarmed_bonus", ModPlayerData.SLOW_UNARMED_BONUS)
                     .put("poison_unarmed_bonus", ModPlayerData.POISON_UNARMED_BONUS)
                     .put("lightning_unarmed_bonus", ModPlayerData.LIGHTNING_UNARMED_BONUS)
