@@ -77,24 +77,28 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         }
         LinkedHashMap<List<String>, Integer> page = new LinkedHashMap<>();
         if (currentTab == 0) {
-            page.put(List.of("area_mining_bonus", "None"), 10);
-            page.put(List.of("xp_mining_bonus", "area_mining_bonus"), 20);
+            page.put(List.of("area_mining_bonus", "None"), ModPlayerData.AREA_MINING_COST);
+            page.put(List.of("xp_mining_bonus", "area_mining_bonus"), ModPlayerData.XP_MINING_COST);
+            page.put(List.of("buried_treasures_two_mining_bonus", "xp_mining_bonus"), ModPlayerData.BURIED_TREASURES_TWO_MINING_COST);
         } else if (currentTab == 1) {
-            page.put(List.of("feller_chopping_bonus", "None"), 10);
+            page.put(List.of("replant_chopping_bonus", "None"), ModPlayerData.REPLANT_CHOPPING_COST);
+            page.put(List.of("feller_chopping_bonus", "replant_chopping_bonus"), ModPlayerData.FELLER_CHOPPING_COST);
         } else if (currentTab == 2) {
-            page.put(List.of("area_digging_bonus", "None"), 10);
+            page.put(List.of("area_digging_bonus", "None"), ModPlayerData.AREA_DIGGING_COST);
+            page.put(List.of("buried_treasures_one_digging_bonus", "area_digging_bonus"), ModPlayerData.BURIED_TREASURES_ONE_DIGGING_COST);
+            page.put(List.of("buried_treasures_two_digging_bonus", "buried_treasures_one_digging_bonus"), ModPlayerData.BURIED_TREASURES_TWO_DIGGING_COST);
         } else if (currentTab == 3) {
-            page.put(List.of("weakness_swords_bonus", "None"), 10);
-            page.put(List.of("wither_swords_bonus", "weakness_swords_bonus"), 20);
-            page.put(List.of("blindness_swords_bonus", "wither_swords_bonus"), 30);
+            page.put(List.of("weakness_swords_bonus", "None"), ModPlayerData.WEAKNESS_SWORDS_COST);
+            page.put(List.of("wither_swords_bonus", "weakness_swords_bonus"), ModPlayerData.WITHER_SWORDS_COST);
+            page.put(List.of("blindness_swords_bonus", "wither_swords_bonus"), ModPlayerData.BLINDNESS_SWORDS_COST);
         } else if (currentTab == 4) {
-            page.put(List.of("jump_axes_bonus", "None"), 10);
-            page.put(List.of("regeneration_axes_bonus", "jump_axes_bonus"), 20);
-            page.put(List.of("invisibility_axes_bonus", "regeneration_axes_bonus"), 30);
+            page.put(List.of("jump_axes_bonus", "None"), ModPlayerData.JUMP_AXES_COST);
+            page.put(List.of("regeneration_axes_bonus", "jump_axes_bonus"), ModPlayerData.REGENERATION_AXES_COST);
+            page.put(List.of("invisibility_axes_bonus", "regeneration_axes_bonus"), ModPlayerData.INVISIBILITY_AXES_COST);
         } else if (currentTab == 5) {
-            page.put(List.of("slow_unarmed_bonus", "None"), 10);
-            page.put(List.of("poison_unarmed_bonus", "slow_unarmed_bonus"), 20);
-            page.put(List.of("lightning_unarmed_bonus", "poison_unarmed_bonus"), 30);
+            page.put(List.of("slow_unarmed_bonus", "None"), ModPlayerData.SLOW_UNARMED_COST);
+            page.put(List.of("poison_unarmed_bonus", "slow_unarmed_bonus"), ModPlayerData.POISON_UNARMED_COST);
+            page.put(List.of("lightning_unarmed_bonus", "poison_unarmed_bonus"), ModPlayerData.LIGHTNING_UNARMED_COST);
         }
         renderPage(page);
     }
@@ -182,11 +186,11 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         @Override
         protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             if (SkillTreeScreen.this.player.hasData(bonus)) {
-                this.active = (!SkillTreeScreen.this.player.getData(bonus).has() && SkillTreeScreen.this.player.getData(this.skill).skill() >= this.cost);
+                this.active = (!ModPlayerData.check(SkillTreeScreen.this.player, bonus) && SkillTreeScreen.this.player.getData(this.skill).skill() >= this.cost);
                 if (SkillTreeScreen.this.player.getData(this.skill).skill() < this.cost || !this.required) {
                     this.setFGColor(16711680);  // Red 255
                 }
-                if (SkillTreeScreen.this.player.hasData(bonus) && SkillTreeScreen.this.player.getData(bonus).has()) {
+                if (SkillTreeScreen.this.player.hasData(bonus) && ModPlayerData.check(SkillTreeScreen.this.player, this.bonus)) {
                     this.setFGColor(65280);  // Green 255
                 }
             }
@@ -197,7 +201,7 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         public void onPress() {
             ModDataMapTypes.SkillData skillData = SkillTreeScreen.this.player.getData(this.skill);
             // If the player has the skill cost and doesn't have the bonus already
-            if (skillData.skill() >= this.cost && !SkillTreeScreen.this.player.getData(this.bonus).has() && this.required) {
+            if (skillData.skill() >= this.cost && !ModPlayerData.check(SkillTreeScreen.this.player, this.bonus) && this.required) {
                 PacketDistributor.sendToServer(new ModDataMapTypes.BonusData(this.bonusName, this.skillName, this.cost, true));
                 this.clearFGColor();
             }

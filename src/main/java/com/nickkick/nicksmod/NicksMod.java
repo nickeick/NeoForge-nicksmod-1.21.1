@@ -9,6 +9,7 @@ import com.nickkick.nicksmod.data_map.network.ClientPayloadHandler;
 import com.nickkick.nicksmod.data_map.network.ServerPayloadHandler;
 import com.nickkick.nicksmod.item.ModCreativeModeTabs;
 import com.nickkick.nicksmod.item.ModItems;
+import com.nickkick.nicksmod.loot.ModLootModifiers;
 import com.nickkick.nicksmod.player.ModKeyMappings;
 import com.nickkick.nicksmod.player.ModPlayerData;
 import com.nickkick.nicksmod.screen.ModMenuTypes;
@@ -62,6 +63,7 @@ public class NicksMod {
         ModDataComponents.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModPlayerData.register(modEventBus);
+        ModLootModifiers.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

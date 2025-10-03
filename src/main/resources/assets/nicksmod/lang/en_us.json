@@ -1,8 +1,4 @@
 {
-  "item.nicksmod.bismuth": "Bismuth",
-  "item.nicksmod.raw_bismuth": "Raw Bismuth",
-  "item.nicksmod.chisel": "Chisel",
-
   "item.nicksmod.zircon": "Zircon",
   "block.nicksmod.zircon_ore": "Zircon Ore",
   "block.nicksmod.skill_tree_block": "Skill Tree Block",
@@ -44,12 +40,6 @@
 
   "item.nicksmod.mustard": "Mustard",
   "item.nicksmod.ketchup": "Ketchup",
-
-  "block.nicksmod.bismuth_block": "Block of Bismuth",
-  "block.nicksmod.bismuth_ore": "Bismuth Ore",
-  "block.nicksmod.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
-
-  "block.nicksmod.magic_block": "Magic Block",
 
   "block.nicksmod.white_bricks": "White Bricks",
   "block.nicksmod.light_gray_bricks": "Light Gray Bricks",
@@ -153,8 +143,7 @@
   "item.nicksmod.magenta_clay": "Magenta Clay",
   "item.nicksmod.pink_clay": "Pink Clay",
 
-  "creativetab.nicksmod.bismuth_items": "Bismuth Items",
-  "creativetab.nicksmod.bismuth_blocks": "Bismuth Blocks",
+  "creativetab.nicksmod.skill_tree_items": "Skill Tree Items",
   "creativetab.nicksmod.hot_dog_items": "Hot Dogs",
   "creativetab.nicksmod.colorful_bricks": "Colorful Bricks",
 
@@ -163,8 +152,12 @@
 
   "tooltip.nicksmod.bonus.area_mining_bonus": "3x3 Mining",
   "tooltip.nicksmod.bonus.xp_mining_bonus": "Double Mining XP",
+  "tooltip.nicksmod.bonus.buried_treasures_two_mining_bonus": "Buried Treasures II",
+  "tooltip.nicksmod.bonus.replant_chopping_bonus": "Sapling Replanter",
   "tooltip.nicksmod.bonus.feller_chopping_bonus": "Tree Feller",
   "tooltip.nicksmod.bonus.area_digging_bonus": "3x3 Digging",
+  "tooltip.nicksmod.bonus.buried_treasures_one_digging_bonus": "Buried Treasures I",
+  "tooltip.nicksmod.bonus.buried_treasures_two_digging_bonus": "Buried Treasures II",
   "tooltip.nicksmod.bonus.jump_axes_bonus": "Jump Boost",
   "tooltip.nicksmod.bonus.regeneration_axes_bonus": "Regeneration",
   "tooltip.nicksmod.bonus.invisibility_axes_bonus": "Invisibility",

@@ -19,17 +19,18 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -41,11 +42,15 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = NicksMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
@@ -75,40 +80,107 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onMine(BlockEvent.BreakEvent event) {
-        ItemStack mainHandItem = event.getPlayer().getMainHandItem();
+        Player player = event.getPlayer();
+        ItemStack mainHandItem = player.getMainHandItem();
         if(event.getState().is(BlockTags.MINEABLE_WITH_PICKAXE) && !event.isCanceled() && mainHandItem.is(ItemTags.PICKAXES)) {
-            updateSkillStaff(event.getPlayer(), ModDataComponents.MINED_BLOCKS);
-            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.AREA_MINING_BONUS.get());
-            ModAbilityData.AreaModeData abilityData = event.getPlayer().getData(ModPlayerData.AREA_MODE_ENABLED.get());
-            if(bonusData.has() && abilityData.isEnabled()) {
+            updateSkillStaff(player, ModDataComponents.MINED_BLOCKS);
+            ModAbilityData.AreaModeData abilityData = player.getData(ModPlayerData.AREA_MODE_ENABLED.get());
+            if(ModPlayerData.check(player, ModPlayerData.AREA_MINING_BONUS.get()) && abilityData.isEnabled()) {
                 ModEventHelpers.onAreaEffectEvent(event, mainHandItem.getItem());
             }
-            Level level = (Level) event.getLevel();
-            BlockState blockState = level.getBlockState(event.getPos());
-            Block block = blockState.getBlock();
-            if (block instanceof DropExperienceBlock experienceBlock) {
-                int xp = experienceBlock.getExpDrop(blockState, level, event.getPos(), level.getBlockEntity(event.getPos()), event.getPlayer(), mainHandItem);
-                event.getPlayer().giveExperiencePoints(xp);
+            if (ModPlayerData.check(player, ModPlayerData.XP_MINING_BONUS.get())) {
+                Level level = (Level) event.getLevel();
+                BlockState blockState = level.getBlockState(event.getPos());
+                Block block = blockState.getBlock();
+                if (block instanceof DropExperienceBlock experienceBlock) {
+                    int xp = experienceBlock.getExpDrop(blockState, level, event.getPos(), level.getBlockEntity(event.getPos()), player, mainHandItem);
+                    player.giveExperiencePoints(xp);
+                }
+            }
+            if (ModPlayerData.check(player, ModPlayerData.BURIED_TREASURES_TWO_MINING_BONUS.get())) {
+                ServerLevel level = (ServerLevel) event.getLevel();
+                BlockPos pos = event.getPos();
+                int randInt = (int) (Math.random() * 10000) + 1; // 1 - 10000
+                if (randInt % 50 == 0) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_INGOT)));
+                }
+                if (randInt % 500 == 1) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.GOLD_INGOT)));
+                }
+                if (randInt % 5000 == 2) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.DIAMOND)));
+                }
             }
         }
         if(event.getState().is(BlockTags.MINEABLE_WITH_AXE) && !event.isCanceled() && mainHandItem.is(ItemTags.AXES)) {
-            updateSkillStaff(event.getPlayer(), ModDataComponents.CHOPPED_BLOCKS);
-            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.FELLER_CHOPPING_BONUS.get());
-            ModAbilityData.FellerModeData abilityData = event.getPlayer().getData(ModPlayerData.FELLER_MODE_ENABLED.get());
-            if (bonusData.has() && event.getLevel().getBlockState(event.getPos()).is(BlockTags.LOGS) && abilityData.isEnabled()) {
+            updateSkillStaff(player, ModDataComponents.CHOPPED_BLOCKS);
+
+            ModAbilityData.FellerModeData abilityData = player.getData(ModPlayerData.FELLER_MODE_ENABLED.get());
+            if (ModPlayerData.check(player, ModPlayerData.FELLER_CHOPPING_BONUS.get()) && event.getLevel().getBlockState(event.getPos()).is(BlockTags.LOGS) && abilityData.isEnabled()) {
                 ModEventHelpers.onTreeFellEffectEvent(event);
-                //ModEventHelpers.resetBlock();
             }
         }
         if(event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL) && !event.isCanceled() && mainHandItem.is(ItemTags.SHOVELS)) {
-            updateSkillStaff(event.getPlayer(), ModDataComponents.DUG_BLOCKS);
-            ModDataMapTypes.BonusData bonusData = event.getPlayer().getData(ModPlayerData.AREA_DIGGING_BONUS.get());
-            ModAbilityData.AreaModeData abilityData = event.getPlayer().getData(ModPlayerData.AREA_MODE_ENABLED.get());
-            if(bonusData.has() && abilityData.isEnabled()) {
+            updateSkillStaff(player, ModDataComponents.DUG_BLOCKS);
+            ModAbilityData.AreaModeData abilityData = player.getData(ModPlayerData.AREA_MODE_ENABLED.get());
+            if(ModPlayerData.check(player, ModPlayerData.AREA_DIGGING_BONUS.get()) && abilityData.isEnabled()) {
                 ModEventHelpers.onAreaEffectEvent(event, mainHandItem.getItem());
+            }
+            if (ModPlayerData.check(player, ModPlayerData.BURIED_TREASURES_ONE_DIGGING_BONUS.get()) && !ModPlayerData.check(player, ModPlayerData.BURIED_TREASURES_TWO_DIGGING_BONUS.get())) {
+                ServerLevel level = (ServerLevel) event.getLevel();
+                BlockPos pos = event.getPos();
+                int randInt = (int) (Math.random() * 10000) + 1; // 1 - 10000
+                if (randInt % 50 == 0) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.FLINT)));
+                }
+                if (randInt % 500 == 1) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_INGOT)));
+                }
+                if (randInt % 5000 == 2) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.GOLD_INGOT)));
+                }
+            }
+            if (ModPlayerData.check(player, ModPlayerData.BURIED_TREASURES_TWO_DIGGING_BONUS.get())) {
+                ServerLevel level = (ServerLevel) event.getLevel();
+                BlockPos pos = event.getPos();
+                int randInt = (int) (Math.random() * 10000) + 1; // 1 - 10000
+                if (randInt % 50 == 0) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_INGOT)));
+                }
+                if (randInt % 500 == 1) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.GOLD_INGOT)));
+                }
+                if (randInt % 5000 == 2) {
+                    level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.DIAMOND)));
+                }
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onBlockDrops(BlockDropsEvent event) {
+        Level level = (Level) event.getLevel();
+
+        if (event.getBreaker() instanceof Player player) {
+            if (ModPlayerData.check(player, ModPlayerData.REPLANT_CHOPPING_BONUS.get()) && !level.isClientSide && event.getState().is(BlockTags.LOGS)){
+                BlockPos pos = event.getPos();
+
+                Block sapling = null;
+                if (event.getState().is(Blocks.OAK_LOG)) sapling = Blocks.OAK_SAPLING;
+                else if (event.getState().is(Blocks.DARK_OAK_LOG)) sapling = Blocks.DARK_OAK_SAPLING;
+                else if (event.getState().is(Blocks.SPRUCE_LOG)) sapling = Blocks.SPRUCE_SAPLING;
+                else if (event.getState().is(Blocks.BIRCH_LOG)) sapling = Blocks.BIRCH_SAPLING;
+                else if (event.getState().is(Blocks.JUNGLE_LOG)) sapling = Blocks.JUNGLE_SAPLING;
+                else if (event.getState().is(Blocks.ACACIA_LOG)) sapling = Blocks.ACACIA_SAPLING;
+                else if (event.getState().is(Blocks.CHERRY_LOG)) sapling = Blocks.CHERRY_SAPLING;
+
+                if (sapling != null && sapling.defaultBlockState().canSurvive(level, pos)) {
+                    level.setBlockAndUpdate(pos, sapling.defaultBlockState());
+                }
+            }
+        }
+    }
+
 
     @SubscribeEvent
     public static void onDamage(LivingDamageEvent.Pre event) {
@@ -116,46 +188,37 @@ public class ModEvents {
             ItemStack mainHandItem = player.getMainHandItem();
             if(mainHandItem.is(ItemTags.SWORDS)) {
                 updateSkillStaff(player, ModDataComponents.SWORD_ATTACKS);
-                ModDataMapTypes.BonusData weaknessBonus = player.getData(ModPlayerData.WEAKNESS_SWORDS_BONUS.get());
-                if (weaknessBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.WEAKNESS_SWORDS_BONUS.get())) {
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 600));
                 }
-                ModDataMapTypes.BonusData witherBonus = player.getData(ModPlayerData.WITHER_SWORDS_BONUS.get());
-                if (witherBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.WITHER_SWORDS_BONUS.get())) {
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.WITHER, 600));
                 }
-                ModDataMapTypes.BonusData blindnessBonus = player.getData(ModPlayerData.BLINDNESS_SWORDS_BONUS.get());
-                if (blindnessBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.BLINDNESS_SWORDS_BONUS.get())) {
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 600));
                 }
             }
             if(mainHandItem.is(ItemTags.AXES)) {
                 updateSkillStaff(player, ModDataComponents.AXE_ATTACKS);
-                ModDataMapTypes.BonusData jumpBonus = player.getData(ModPlayerData.JUMP_AXES_BONUS.get());
-                if (jumpBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.JUMP_AXES_BONUS.get())) {
                     player.addEffect(new MobEffectInstance(MobEffects.JUMP, 600));
                 }
-                ModDataMapTypes.BonusData regenerationBonus = player.getData(ModPlayerData.REGENERATION_AXES_BONUS.get());
-                if (regenerationBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.REGENERATION_AXES_BONUS.get())) {
                     player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 600));
                 }
-                ModDataMapTypes.BonusData invisibilityBonus = player.getData(ModPlayerData.INVISIBILITY_AXES_BONUS.get());
-                if (invisibilityBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.INVISIBILITY_AXES_BONUS.get())) {
                     player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 600));
                 }
             }
             if (mainHandItem.isEmpty()) {
                 updateSkillStaff(player, ModDataComponents.UNARMED_ATTACKS);
-                ModDataMapTypes.BonusData slowBonus = player.getData(ModPlayerData.SLOW_UNARMED_BONUS.get());
-                if(slowBonus.has()) {
+                if(ModPlayerData.check(player, ModPlayerData.SLOW_UNARMED_BONUS.get())) {
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 3));
                 }
-                ModDataMapTypes.BonusData poisonBonus = player.getData(ModPlayerData.POISON_UNARMED_BONUS.get());
-                if (poisonBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.POISON_UNARMED_BONUS.get())) {
                     event.getEntity().addEffect(new MobEffectInstance(MobEffects.POISON, 600));
                 }
-                ModDataMapTypes.BonusData lightningBonus = player.getData(ModPlayerData.LIGHTNING_UNARMED_BONUS.get());
-                if (lightningBonus.has()) {
+                if (ModPlayerData.check(player, ModPlayerData.LIGHTNING_UNARMED_BONUS.get())) {
                     EntityType.LIGHTNING_BOLT.spawn((ServerLevel) event.getEntity().level(), event.getEntity().blockPosition(), MobSpawnType.TRIGGERED);
                 }
             }
@@ -224,8 +287,6 @@ class ModClientEvents {
 // Thank you Kaupenjoe
 class ModEventHelpers {
     private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
-    private static final Set<BlockPos> FELLED_BLOCKS = new HashSet<>();
-    private static Block TO_BE_FELLED_BLOCK = null;
 
     public static List<BlockPos> getBlocksToBeDestroyed(int range, BlockPos initalBlockPos, ServerPlayer player) {
         List<BlockPos> positions = new ArrayList<>();
@@ -297,10 +358,7 @@ class ModEventHelpers {
             pos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
             if (level.getBlockState(pos).is(BlockTags.LOGS)) {
                 serverPlayer.gameMode.destroyBlock(pos);
-                //FELLED_BLOCKS.add(pos);
             }
-
-            //FELLED_BLOCKS.clear();
         }
     }
 }
