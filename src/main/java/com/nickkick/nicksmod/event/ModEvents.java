@@ -79,6 +79,36 @@ public class ModEvents {
     }
 
     @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            // Send SkillData
+            for (Supplier<AttachmentType<ModDataMapTypes.SkillData>> skill: ModPlayerData.SKILL_NAMES.values()) {
+                PacketDistributor.sendToPlayer(serverPlayer, serverPlayer.getData(skill.get()));
+            }
+
+            // Send BonusData
+            for(Supplier<AttachmentType<ModDataMapTypes.BonusData>> bonus: ModPlayerData.BONUS_NAMES.values()) {
+                PacketDistributor.sendToPlayer(serverPlayer, serverPlayer.getData(bonus.get()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            // Send SkillData
+            for (Supplier<AttachmentType<ModDataMapTypes.SkillData>> skill: ModPlayerData.SKILL_NAMES.values()) {
+                PacketDistributor.sendToPlayer(serverPlayer, serverPlayer.getData(skill.get()));
+            }
+
+            // Send BonusData
+            for(Supplier<AttachmentType<ModDataMapTypes.BonusData>> bonus: ModPlayerData.BONUS_NAMES.values()) {
+                PacketDistributor.sendToPlayer(serverPlayer, serverPlayer.getData(bonus.get()));
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onMine(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         ItemStack mainHandItem = player.getMainHandItem();

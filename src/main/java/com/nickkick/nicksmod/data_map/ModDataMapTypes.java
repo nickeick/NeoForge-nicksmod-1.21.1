@@ -46,10 +46,7 @@ public class ModDataMapTypes {
                 Codec.STRING.fieldOf("skill").forGetter(BonusData::skill),
                 Codec.INT.fieldOf("cost").forGetter(BonusData::cost),
                 Codec.BOOL.fieldOf("has").forGetter(BonusData::has)
-        ).apply(instance, (name, skill, cost, has) -> {
-            System.out.println("Decoding BonusData: " + name + ", " + skill + ", " + cost + ", " + has);
-            return new BonusData(name, skill, cost, has);
-        }));
+        ).apply(instance, BonusData::new));
 
         public static final StreamCodec<ByteBuf, BonusData> STREAM_CODEC =
                 StreamCodec.composite(

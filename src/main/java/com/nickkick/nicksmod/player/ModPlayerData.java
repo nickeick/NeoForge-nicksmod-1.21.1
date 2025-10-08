@@ -20,36 +20,42 @@ public class ModPlayerData {
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> MINING_SKILL = ATTACHMENT_TYPES.register(
             "mining_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("mining",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> CHOPPING_SKILL = ATTACHMENT_TYPES.register(
             "chopping_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("chopping",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> SWORDS_SKILL = ATTACHMENT_TYPES.register(
             "swords_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("swords",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> DIGGING_SKILL = ATTACHMENT_TYPES.register(
             "digging_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("digging",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> AXES_SKILL = ATTACHMENT_TYPES.register(
             "axes_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("axes",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.SkillData>> UNARMED_SKILL = ATTACHMENT_TYPES.register(
             "unarmed_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData("unarmed",0))
                     .serialize(ModDataMapTypes.SkillData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
@@ -62,6 +68,16 @@ public class ModPlayerData {
                     .put("axes", ModPlayerData.AXES_SKILL)
                     .put("unarmed", ModPlayerData.UNARMED_SKILL)
                     .build();
+
+    public static Supplier<AttachmentType<ModDataMapTypes.SkillData>> registerSkill(String name) {
+        // To add to Map
+        return ATTACHMENT_TYPES.register(
+                name + "_skill", () -> AttachmentType.builder(() -> new ModDataMapTypes.SkillData(name,0))
+                        .serialize(ModDataMapTypes.SkillData.CODEC)
+                        .copyOnDeath()
+                        .build()
+        );
+    }
 
     public static final int AREA_MINING_COST = 500;
     public static final int XP_MINING_COST = 10000;
@@ -84,91 +100,108 @@ public class ModPlayerData {
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> AREA_MINING_BONUS = ATTACHMENT_TYPES.register(
             "area_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("area_mining_bonus", "mining", AREA_MINING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> XP_MINING_BONUS = ATTACHMENT_TYPES.register(
             "xp_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("xp_mining_bonus", "mining", XP_MINING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> BURIED_TREASURES_TWO_MINING_BONUS = ATTACHMENT_TYPES.register(
             "buried_treasures_two_mining_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("buried_treasures_two_mining_bonus", "mining", BURIED_TREASURES_TWO_MINING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> REPLANT_CHOPPING_BONUS = ATTACHMENT_TYPES.register(
             "replant_chopping_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("replant_chopping_bonus", "chopping", REPLANT_CHOPPING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> FELLER_CHOPPING_BONUS = ATTACHMENT_TYPES.register(
             "feller_chopping_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("feller_chopping_bonus", "chopping", FELLER_CHOPPING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> AREA_DIGGING_BONUS = ATTACHMENT_TYPES.register(
             "area_digging_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("area_digging_bonus", "digging", AREA_DIGGING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> BURIED_TREASURES_ONE_DIGGING_BONUS = ATTACHMENT_TYPES.register(
             "buried_treasures_one_digging_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("buried_treasures_one_digging_bonus", "digging", BURIED_TREASURES_ONE_DIGGING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> BURIED_TREASURES_TWO_DIGGING_BONUS = ATTACHMENT_TYPES.register(
             "buried_treasures_two_digging_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("buried_treasures_two_digging_bonus", "digging", BURIED_TREASURES_TWO_DIGGING_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> WEAKNESS_SWORDS_BONUS = ATTACHMENT_TYPES.register(
             "weakness_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("weakness_swords_bonus", "swords", WEAKNESS_SWORDS_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> WITHER_SWORDS_BONUS = ATTACHMENT_TYPES.register(
             "wither_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("wither_swords_bonus", "swords", WITHER_SWORDS_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> BLINDNESS_SWORDS_BONUS = ATTACHMENT_TYPES.register(
             "blindness_swords_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("blindness_swords_bonus", "swords", BLINDNESS_SWORDS_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> JUMP_AXES_BONUS = ATTACHMENT_TYPES.register(
             "jump_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("jump_axes_bonus", "axes", JUMP_AXES_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> REGENERATION_AXES_BONUS = ATTACHMENT_TYPES.register(
             "regeneration_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("regeneration_axes_bonus", "axes", REGENERATION_AXES_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> INVISIBILITY_AXES_BONUS = ATTACHMENT_TYPES.register(
             "invisibility_axes_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("invisibility_axes_bonus", "axes", INVISIBILITY_AXES_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> SLOW_UNARMED_BONUS = ATTACHMENT_TYPES.register(
             "slow_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("slow_unarmed_bonus", "unarmed", SLOW_UNARMED_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> POISON_UNARMED_BONUS = ATTACHMENT_TYPES.register(
             "poison_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("poison_unarmed_bonus", "unarmed", POISON_UNARMED_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
     public static final Supplier<AttachmentType<ModDataMapTypes.BonusData>> LIGHTNING_UNARMED_BONUS = ATTACHMENT_TYPES.register(
             "lightning_unarmed_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData("lightning_unarmed_bonus", "unarmed", LIGHTNING_UNARMED_COST, false))
                     .serialize(ModDataMapTypes.BonusData.CODEC)
+                    .copyOnDeath()
                     .build()
     );
 
@@ -192,6 +225,16 @@ public class ModPlayerData {
                     .put("poison_unarmed_bonus", ModPlayerData.POISON_UNARMED_BONUS)
                     .put("lightning_unarmed_bonus", ModPlayerData.LIGHTNING_UNARMED_BONUS)
                     .build();
+
+    public static Supplier<AttachmentType<ModDataMapTypes.BonusData>> registerBonus(String name, String skill, int cost) {
+        // To add to Map
+        return ATTACHMENT_TYPES.register(
+                name + "_" + skill + "_bonus", () -> AttachmentType.builder(() -> new ModDataMapTypes.BonusData(name + "_" + skill + "_bonus", skill, cost, false))
+                        .serialize(ModDataMapTypes.BonusData.CODEC)
+                        .copyOnDeath()
+                        .build()
+        );
+    }
 
     public static final Supplier<AttachmentType<ModAbilityData.AreaModeData>> AREA_MODE_ENABLED = ATTACHMENT_TYPES.register(
             "area_mode_enabled", () -> AttachmentType.builder(ModAbilityData.AreaModeData::new).build()
