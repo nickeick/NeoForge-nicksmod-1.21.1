@@ -25,7 +25,19 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.STAT_TRACKABLE_ITEMS)
                 .add(ModItems.SKILL_STAFF.get());
 
+        this.tag(ItemTags.ARMOR_ENCHANTABLE)
+                .add(ModItems.PIZZA_HELMET.get())
+                .add(ModItems.PIZZA_CHESTPLATE.get())
+                .add(ModItems.PIZZA_LEGGINGS.get())
+                .add(ModItems.PIZZA_BOOTS.get());
+
         this.tag(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.PIZZA_HELMET.get())
+                .add(ModItems.PIZZA_CHESTPLATE.get())
+                .add(ModItems.PIZZA_LEGGINGS.get())
+                .add(ModItems.PIZZA_BOOTS.get());
+
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(ModItems.PIZZA_HELMET.get())
                 .add(ModItems.PIZZA_CHESTPLATE.get())
                 .add(ModItems.PIZZA_LEGGINGS.get())

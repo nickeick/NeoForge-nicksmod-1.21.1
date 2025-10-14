@@ -33,6 +33,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.HandlerThread;
 import org.slf4j.Logger;
 
+import static com.nickkick.nicksmod.item.ModArmorMaterials.PIZZA_ARMOR_MATERIAL;
 import static com.nickkick.nicksmod.player.ModPlayerData.AREA_MODE_ENABLED;
 import static com.nickkick.nicksmod.player.ModPlayerData.FELLER_MODE_ENABLED;
 
@@ -116,7 +117,7 @@ public class NicksMod {
                             ModDataMapTypes.ToggleAreaAbilityPayload.CODEC,
                             (toggleAbilityPayload, iPayloadContext) -> {
                                 var player = iPayloadContext.player();
-                                var data = player.getData(AREA_MODE_ENABLED);
+                                var data = player.getData(AREA_MODE_ENABLED.get());
                                 data.toggle();
                             }
                     )
@@ -125,7 +126,7 @@ public class NicksMod {
                             ModDataMapTypes.ToggleFellerAbilityPayload.CODEC,
                             (toggleAbilityPayload, iPayloadContext) -> {
                                 var player = iPayloadContext.player();
-                                var data = player.getData(FELLER_MODE_ENABLED);
+                                var data = player.getData(FELLER_MODE_ENABLED.get());
                                 data.toggle();
                             }
                     );

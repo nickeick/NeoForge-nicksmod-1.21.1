@@ -105,6 +105,18 @@ public class ModEvents {
             for(Supplier<AttachmentType<ModDataMapTypes.BonusData>> bonus: ModPlayerData.BONUS_NAMES.values()) {
                 PacketDistributor.sendToPlayer(serverPlayer, serverPlayer.getData(bonus.get()));
             }
+
+            // Send AbilityData
+            ModAbilityData.AreaModeData areaModeData = serverPlayer.getData(ModPlayerData.AREA_MODE_ENABLED.get());
+            if (areaModeData.isEnabled()) {
+                // Set to false because that is the client side default
+                areaModeData.setEnabled(false);
+            }
+            ModAbilityData.FellerModeData fellerModeData = serverPlayer.getData(ModPlayerData.FELLER_MODE_ENABLED.get());
+            if (fellerModeData.isEnabled()) {
+                // Set to false because that is the client side default
+                areaModeData.setEnabled(false);
+            }
         }
     }
 
@@ -276,7 +288,7 @@ class ModClientEvents {
         while (ModKeyMappings.AREA_MODE_MAPPING.consumeClick()) {
             Player player = Minecraft.getInstance().player;
             if (player != null) {
-                if(player.hasData(ModPlayerData.AREA_MINING_BONUS.get()) && player.getData(ModPlayerData.AREA_MINING_BONUS.get()).has()) {
+                if(player.getData(ModPlayerData.AREA_DIGGING_BONUS.get()).has() || player.getData(ModPlayerData.AREA_MINING_BONUS.get()).has()) {
                     ModAbilityData.AreaModeData abilityData = player.getData(ModPlayerData.AREA_MODE_ENABLED.get());
                     if(abilityData.isEnabled()) {
                         player.sendSystemMessage(Component.literal("3x3 Area Disabled"));
@@ -286,7 +298,6 @@ class ModClientEvents {
                         abilityData.setEnabled(true);
                     }
                     PacketDistributor.sendToServer(new ModDataMapTypes.ToggleAreaAbilityPayload());
-                    //System.out.println("test");
                 } else {
                     player.sendSystemMessage(Component.literal("You do not have this upgrade"));
                 }
