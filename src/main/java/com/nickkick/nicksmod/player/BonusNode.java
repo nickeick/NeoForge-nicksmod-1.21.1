@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BonusNode {
-    ModDataMapTypes.BonusData data;
-    List<BonusNode> requirements;
-    List<BonusNode> children;
+    private final ModDataMapTypes.BonusData data;
+    private final List<BonusNode> requirements;
+    private final List<BonusNode> children;
 
     public BonusNode(ModDataMapTypes.BonusData data) {
         this.data = data;

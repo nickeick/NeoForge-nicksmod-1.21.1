@@ -135,12 +135,12 @@ public class ModPlayerData {
 
     public static Supplier<AttachmentType<ModDataMapTypes.BonusData>> registerBonus(BonusNode node, List<BonusNode> requirements, BonusTree tree) throws LinkLoopException {
         Supplier<AttachmentType<ModDataMapTypes.BonusData>> bonus_supplier = ATTACHMENT_TYPES.register(
-                node.data.name(), () -> AttachmentType.builder(node::getData)
+                node.getData().name(), () -> AttachmentType.builder(node::getData)
                         .serialize(ModDataMapTypes.BonusData.CODEC)
                         .copyOnDeath()
                         .build()
         );
-        BONUS_NAMES.put(node.data.name(), bonus_supplier);
+        BONUS_NAMES.put(node.getData().name(), bonus_supplier);
         node.addRequirements(requirements);
         tree.addNode(node);
         return bonus_supplier;

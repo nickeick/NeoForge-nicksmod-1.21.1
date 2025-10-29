@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BonusTree {
     private final List<BonusNode> fullTree;
-    private String name;
+    private final String name;
 
     public BonusTree(String name, List<BonusNode> fullTree) {
         this.name = name;
