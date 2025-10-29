@@ -63,6 +63,8 @@ public class ModDataMapTypes {
 
         @Override
         public CustomPacketPayload.@NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
+
+        public boolean equals(BonusData bonusData) { return bonusData.name.equals(this.name) && bonusData.has() == this.has() && bonusData.skill().equals(this.skill) && bonusData.toString().equals(this.toString()) && bonusData.cost() == this.cost(); }
     }
 
     public static DataMapType<EntityType<?>, BonusData> BONUS_DATA;

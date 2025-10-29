@@ -1,8 +1,11 @@
 package com.nickkick.nicksmod.screen.custom;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nickkick.nicksmod.NicksMod;
 import com.nickkick.nicksmod.data_map.ModDataMapTypes;
+import com.nickkick.nicksmod.player.BonusNode;
+import com.nickkick.nicksmod.player.BonusTree;
 import com.nickkick.nicksmod.player.ModPlayerData;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
@@ -19,29 +22,30 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.function.Supplier;
 
 public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     private static final ResourceLocation GUI_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "textures/gui/skill_tree/skill_tree_gui.png");
-    private static final ResourceLocation XP_BAR_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(NicksMod.MOD_ID, "textures/gui/skill_tree/xp_bar.png");
     private final Player player;
     private int offsetX;
     private int offsetY;
     private int currentTab = 0;
+    private final Map<Integer, BonusTree> TAB_TO_TREE = new ImmutableMap.Builder<Integer, BonusTree>()
+            .put(0, ModPlayerData.MINING_TREE)
+            .put(1, ModPlayerData.CHOPPING_TREE)
+            .put(2, ModPlayerData.DIGGING_TREE)
+            .put(3, ModPlayerData.SWORDS_TREE)
+            .put(4, ModPlayerData.AXES_TREE)
+            .put(5, ModPlayerData.UNARMED_TREE)
+            .build();
 
     public SkillTreeScreen(SkillTreeMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.inventoryLabelX = 99999;
         this.inventoryLabelY = 99999;
         this.player = playerInventory.player;
-        //this.offsetX = (width - imageWidth)/2;
-        //this.offsetY = (height - imageHeight) / 2;
     }
 
     @Override
@@ -49,16 +53,11 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, GUI_TEXTURE);
-        RenderSystem.setShaderTexture(0, XP_BAR_TEXTURE);
 
         this.offsetX = (width - imageWidth) / 2;
         this.offsetY = (height - imageHeight) / 2;
 
-        int xp_x = this.offsetX + 26;
-        int xp_y = this.offsetY + 18;
-
         guiGraphics.blit(GUI_TEXTURE, this.offsetX, this.offsetY, 0, 0, imageWidth, imageHeight);
-        //guiGraphics.blit(XP_BAR_TEXTURE, xp_x, xp_y, 0, 0, imageWidth, imageHeight);
     }
 
     @Override
@@ -67,47 +66,21 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         this.renderTooltip(guiGraphics, mouseX, mouseY);
         this.addRenderableWidget(new SkillTreeCloseButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + imageHeight - 25));
         int iter = 0;
-        for (Map.Entry<String, Supplier<AttachmentType<ModDataMapTypes.SkillData>>> entry : ModPlayerData.SKILL_NAMES.entrySet()) {
+        for (Map.Entry<Integer, BonusTree> entry : TAB_TO_TREE.entrySet()) {
             int finalIter = iter;
-            this.addRenderableWidget(Button.builder(Component.literal(entry.getKey().toUpperCase()), btn -> {
+            this.addRenderableWidget(Button.builder(Component.literal(entry.getValue().getName().toUpperCase()), btn -> {
                 this.clearWidgets();
                 currentTab = finalIter;
             }).pos(this.leftPos - 55, this.topPos + iter*25).size(50, 20).build());
             iter = iter + 1;
         }
-        LinkedHashMap<List<String>, Integer> page = new LinkedHashMap<>();
-        if (currentTab == 0) {
-            page.put(List.of("area_mining_bonus", "None"), ModPlayerData.AREA_MINING_COST);
-            page.put(List.of("xp_mining_bonus", "area_mining_bonus"), ModPlayerData.XP_MINING_COST);
-            page.put(List.of("buried_treasures_two_mining_bonus", "xp_mining_bonus"), ModPlayerData.BURIED_TREASURES_TWO_MINING_COST);
-        } else if (currentTab == 1) {
-            page.put(List.of("replant_chopping_bonus", "None"), ModPlayerData.REPLANT_CHOPPING_COST);
-            page.put(List.of("feller_chopping_bonus", "replant_chopping_bonus"), ModPlayerData.FELLER_CHOPPING_COST);
-        } else if (currentTab == 2) {
-            page.put(List.of("area_digging_bonus", "None"), ModPlayerData.AREA_DIGGING_COST);
-            page.put(List.of("buried_treasures_one_digging_bonus", "area_digging_bonus"), ModPlayerData.BURIED_TREASURES_ONE_DIGGING_COST);
-            page.put(List.of("buried_treasures_two_digging_bonus", "buried_treasures_one_digging_bonus"), ModPlayerData.BURIED_TREASURES_TWO_DIGGING_COST);
-        } else if (currentTab == 3) {
-            page.put(List.of("weakness_swords_bonus", "None"), ModPlayerData.WEAKNESS_SWORDS_COST);
-            page.put(List.of("wither_swords_bonus", "weakness_swords_bonus"), ModPlayerData.WITHER_SWORDS_COST);
-            page.put(List.of("blindness_swords_bonus", "wither_swords_bonus"), ModPlayerData.BLINDNESS_SWORDS_COST);
-        } else if (currentTab == 4) {
-            page.put(List.of("jump_axes_bonus", "None"), ModPlayerData.JUMP_AXES_COST);
-            page.put(List.of("regeneration_axes_bonus", "jump_axes_bonus"), ModPlayerData.REGENERATION_AXES_COST);
-            page.put(List.of("invisibility_axes_bonus", "regeneration_axes_bonus"), ModPlayerData.INVISIBILITY_AXES_COST);
-        } else if (currentTab == 5) {
-            page.put(List.of("slow_unarmed_bonus", "None"), ModPlayerData.SLOW_UNARMED_COST);
-            page.put(List.of("poison_unarmed_bonus", "slow_unarmed_bonus"), ModPlayerData.POISON_UNARMED_COST);
-            page.put(List.of("lightning_unarmed_bonus", "poison_unarmed_bonus"), ModPlayerData.LIGHTNING_UNARMED_COST);
-        }
-        renderPage(page);
+        renderPage(TAB_TO_TREE.get(currentTab));
     }
 
-    private void renderPage(LinkedHashMap<List<String>, Integer> pages) {
+    private void renderPage(BonusTree tree) {
         int length = 40;
-        for (List<String> page: pages.keySet()) {
-            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + length, page.get(0), pages.get(page), page.get(1)));
-            length = length + 30;
+        for (BonusNode node : tree.getFullTree()) {
+            this.addRenderableWidget(new SkillTreeBonusButton(this.offsetX + imageWidth / 2 - 50, this.offsetY + length + 30 * tree.getNodeDepth(node), node));
         }
     }
 
@@ -116,25 +89,8 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
         super.renderLabels(guiGraphics, mouseX, mouseY);
 
         Component text = Component.literal("");
-        if (currentTab == 0) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.MINING_SKILL.get());
-            text = Component.literal("Your Mining Skill is " + data.skill());
-        } else if (currentTab == 1) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.CHOPPING_SKILL.get());
-            text = Component.literal("Your Chopping Skill is " + data.skill());
-        } else if (currentTab == 2) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.DIGGING_SKILL.get());
-            text = Component.literal("Your Digging Skill is " + data.skill());
-        } else if (currentTab == 3) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.SWORDS_SKILL.get());
-            text = Component.literal("Your Swords Skill is " + data.skill());
-        } else if (currentTab == 4) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.AXES_SKILL.get());
-            text = Component.literal("Your Axes Skill is " + data.skill());
-        } else if (currentTab == 5) {
-            ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.UNARMED_SKILL.get());
-            text = Component.literal("Your Unarmed Skill is " + data.skill());
-        }
+        ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.SKILL_NAMES.get(TAB_TO_TREE.get(currentTab).getName()).get());
+        text = Component.literal("Your " + data.name().toUpperCase() + " skill is " + data.skill());
         guiGraphics.drawString(this.font, text, imageWidth / 2 - font.width(text)/2, 20, 0, false);
     }
 
@@ -154,32 +110,38 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     }
 
     class SkillTreeBonusButton extends AbstractButton {
+        private final BonusNode node;
         private final int cost;
         private final AttachmentType<ModDataMapTypes.SkillData> skill;
         private final AttachmentType<ModDataMapTypes.BonusData> bonus;
         private final String skillName;
         private final String bonusName;
         private final Boolean required;
-        private final String requiredString;
+        private final List<String> requirementStrings;
 
-        public SkillTreeBonusButton(int x, int y, String bonusName, int cost, String required) {
-            super(x, y, 100, 20, Component.literal(Component.translatable("tooltip.nicksmod.bonus." + bonusName).getString() + ": " + cost));
+        public SkillTreeBonusButton(int x, int y, BonusNode node) {
+            super(x, y, 100, 20, Component.literal(Component.translatable("tooltip.nicksmod.bonus." + node.getData().name()).getString() + ": " + node.getData().cost()));
+            this.node = node;
+            this.bonusName = node.getData().name();
             this.bonus = ModPlayerData.BONUS_NAMES.get(bonusName).get();
             this.skillName = SkillTreeScreen.this.player.getData(this.bonus).skill();
             this.skill = ModPlayerData.SKILL_NAMES.get(this.skillName).get();
-            this.bonusName = bonusName;
             this.cost = SkillTreeScreen.this.player.getData(this.bonus).cost();
-            this.requiredString = required;
-            this.required = Objects.equals(required, "None") || SkillTreeScreen.this.player.getData(ModPlayerData.BONUS_NAMES.get(required).get()).has();
+            this.requirementStrings = node.getRequirements().stream().map(inst -> inst.getData().name()).toList();
+            this.required = node.getRequirements().isEmpty() || node.getRequirements().stream().allMatch(inst -> SkillTreeScreen.this.player.getData(ModPlayerData.BONUS_NAMES.get(inst.getData().name()).get()).has());
             this.setTooltip(null);
         }
 
         @Override
         public void setTooltip(@Nullable Tooltip tooltip) {
-            if (Objects.equals(requiredString, "None")) {
+            if (this.node.getRequirements().isEmpty()) {
                 super.setTooltip(tooltip);
             } else {
-                super.setTooltip(Tooltip.create(Component.literal("Required: " + Component.translatable("tooltip.nicksmod.bonus." + requiredString).getString())));
+                String requirements = "";
+                for (String req : requirementStrings) {
+                    requirements = "Required: " + Component.translatable("tooltip.nicksmod.bonus." + req).getString() + "\n";
+                }
+                super.setTooltip(Tooltip.create(Component.literal(requirements.substring(0, requirements.length() - 1))));
             }
         }
 
