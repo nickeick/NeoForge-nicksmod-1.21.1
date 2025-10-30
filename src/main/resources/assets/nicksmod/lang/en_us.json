@@ -166,5 +166,12 @@
   "tooltip.nicksmod.bonus.lightning_unarmed_bonus": "The Hand of God",
   "tooltip.nicksmod.bonus.weakness_swords_bonus": "Weakness",
   "tooltip.nicksmod.bonus.wither_swords_bonus": "Wither",
-  "tooltip.nicksmod.bonus.blindness_swords_bonus": "Blindness"
+  "tooltip.nicksmod.bonus.blindness_swords_bonus": "Blindness",
+
+  "advancements.nicksmod.zircon_advancement.title": "A Single Step",
+  "advancements.nicksmod.zircon_advancement.description": "Finding a Zircon",
+  "advancements.nicksmod.skill_staff_advancement.title": "Stat Trackin'",
+  "advancements.nicksmod.skill_staff_advancement.description": "Acquire a Skill Staff",
+  "advancements.nicksmod.skill_tree_block_advancement.title": "Investing in Yourself",
+  "advancements.nicksmod.skill_tree_block_advancement.description": "Acquire a Skill Tree Block"
 }

@@ -1,7 +1,6 @@
 package com.nickkick.nicksmod.item;
 
 import com.nickkick.nicksmod.NicksMod;
-import com.nickkick.nicksmod.block.ModBlocks;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -27,7 +25,7 @@ public class ModArmorMaterials {
                 attribute.put(ArmorItem.Type.CHESTPLATE, 8);
                 attribute.put(ArmorItem.Type.HELMET, 3);
                 attribute.put(ArmorItem.Type.BODY, 11);
-            }), 20, 3.0f, 0.0f, () -> ModItems.PIZZA_SLICE.get());
+            }), 20, 3.0f, 0.0f, ModItems.PIZZA_SLICE);
 
 
     private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> typeProtection,

@@ -76,7 +76,7 @@ public class ModDataMapTypes {
                 StreamCodec.unit(new ToggleAreaAbilityPayload());
 
         @Override
-        public Type<ToggleAreaAbilityPayload> type() { return TYPE; }
+        public @NotNull Type<ToggleAreaAbilityPayload> type() { return TYPE; }
     }
 
     public record ToggleFellerAbilityPayload() implements CustomPacketPayload {
@@ -86,6 +86,6 @@ public class ModDataMapTypes {
                 StreamCodec.unit(new ToggleFellerAbilityPayload());
 
         @Override
-        public Type<ToggleFellerAbilityPayload> type() { return TYPE; }
+        public @NotNull Type<ToggleFellerAbilityPayload> type() { return TYPE; }
     }
 }

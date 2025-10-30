@@ -88,9 +88,8 @@ public class SkillTreeScreen extends AbstractContainerScreen<SkillTreeMenu> {
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderLabels(guiGraphics, mouseX, mouseY);
 
-        Component text = Component.literal("");
         ModDataMapTypes.SkillData data = this.player.getData(ModPlayerData.SKILL_NAMES.get(TAB_TO_TREE.get(currentTab).getName()).get());
-        text = Component.literal("Your " + data.name().toUpperCase() + " skill is " + data.skill());
+        Component text = Component.literal("Your " + data.name().toUpperCase() + " skill is " + data.skill());
         guiGraphics.drawString(this.font, text, imageWidth / 2 - font.width(text)/2, 20, 0, false);
     }
 
