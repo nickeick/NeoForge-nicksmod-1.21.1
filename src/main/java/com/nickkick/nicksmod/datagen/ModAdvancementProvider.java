@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends AdvancementProvider {
     public ModAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, existingFileHelper, List.of(new SkillAdvancementGenerator(), new StaffAdvancementGenerator()));
+        super(output, lookupProvider, existingFileHelper, List.of(new SkillAdvancementGenerator(), new HotDogAdvancementGenerator()));
     }
 
     private static final class SkillAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
@@ -76,16 +76,39 @@ public class ModAdvancementProvider extends AdvancementProvider {
         }
     }
 
-    private static final class StaffAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
+    private static final class HotDogAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
         @Override
         public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
-        }
-    }
+            Advancement.Builder HotDogBuilder = Advancement.Builder.advancement();
+            HotDogBuilder.display(
+                    new ItemStack(ModItems.HOT_DOG.get()),
+                    Component.translatable("advancements.nicksmod.hot_dog_advancement.title"),
+                    Component.translatable("advancements.nicksmod.hot_dog_advancement.description"),
+                    null,
+                    AdvancementType.GOAL,
+                    true,
+                    false,
+                    false
+            );
+            HotDogBuilder.addCriterion("pickup_hot_dog", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.HOT_DOG.get()));
+            HotDogBuilder.requirements(AdvancementRequirements.allOf(List.of("pickup_hot_dog")));
+            HotDogBuilder.save(saver, ResourceLocation.fromNamespaceAndPath("nicksmod", "hot_dog_advancement"), existingFileHelper);
 
-    private static final class SkillTreeBlockAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
-        @Override
-        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
-
+            Advancement.Builder PizzaBuilder = Advancement.Builder.advancement();
+            PizzaBuilder.parent(HotDogBuilder.build(ResourceLocation.fromNamespaceAndPath("nicksmod", "hot_dog_advancement")));
+            PizzaBuilder.display(
+                    new ItemStack(ModItems.PIZZA_SLICE.get()),
+                    Component.translatable("advancements.nicksmod.pizza_advancement.title"),
+                    Component.translatable("advancements.nicksmod.pizza_advancement.description"),
+                    null,
+                    AdvancementType.GOAL,
+                    true,
+                    true,
+                    false
+            );
+            PizzaBuilder.addCriterion("pickup_pizza", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PIZZA_SLICE.get()));
+            PizzaBuilder.requirements(AdvancementRequirements.allOf(List.of("pickup_pizza")));
+            PizzaBuilder.save(saver, ResourceLocation.fromNamespaceAndPath("nicksmod", "pizza_advancement"), existingFileHelper);
         }
     }
 }

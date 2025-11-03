@@ -173,5 +173,10 @@
   "advancements.nicksmod.skill_staff_advancement.title": "Stat Trackin'",
   "advancements.nicksmod.skill_staff_advancement.description": "Acquire a Skill Staff",
   "advancements.nicksmod.skill_tree_block_advancement.title": "Investing in Yourself",
-  "advancements.nicksmod.skill_tree_block_advancement.description": "Acquire a Skill Tree Block"
+  "advancements.nicksmod.skill_tree_block_advancement.description": "Acquire a Skill Tree Block",
+
+  "advancements.nicksmod.hot_dog_advancement.title": "A Scrumptious Treat",
+  "advancements.nicksmod.hot_dog_advancement.description": "Acquire a Hot Dog",
+  "advancements.nicksmod.pizza_advancement.title": "The Food of Royalty",
+  "advancements.nicksmod.pizza_advancement.description": "Acquire a Slice of Pizza"
 }
